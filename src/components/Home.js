@@ -13,7 +13,7 @@ function Home() {
         e.preventDefault()
 
         if (userInfo.username === "eamon" && userInfo.password === "password")
-            navigate("/welcome")
+            navigate("/games")
         else{
             alert("Invalid user!")
             setUserInfo(defaultobj)
