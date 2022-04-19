@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.game-list{
+  background-color: aliceblue;
+}
+
+div {
+  padding: .5em;
+}
