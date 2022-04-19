@@ -8,6 +8,7 @@ function NewUserForm({setIsNewUser, isNewUser}){
 
     return (
         <div>
+            <h4>New user? Create an account here</h4>
         <form onSubmit={handleSubmit}>
             <table>
             <tr>

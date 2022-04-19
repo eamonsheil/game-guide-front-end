@@ -6,17 +6,27 @@ import {UserContext} from "./context/user"
 
 const defaultobj = {username: "", password: ""}
 function Home() {
-    const user = useContext(UserContext)
-    console.log(user)
+    const [user, setUser] = useContext(UserContext)
+
     const [userInfo, setUserInfo] = useState(defaultobj)
+    const [testUser, setTestUser] = useState({
+        username: "",
+        password: ""
+    })
     const [isNewUser, setIsNewUser] = useState(false)
     const navigate = useNavigate()
 
     function handleSubmit(e) {
         e.preventDefault()
 
-        if (userInfo.username === "eamon" && userInfo.password === "password")
+        fetch(`http://localhost:9292/users/by-username/${userInfo.username}`)
+        .then( res => res.json())
+        .then( data => setTestUser(data))
+
+        if (userInfo.username === testUser.username && userInfo.password === testUser.username){
+            setUser(testUser)
             navigate("/games")
+        }
         else{
             alert("Invalid user!")
             setUserInfo(defaultobj)
