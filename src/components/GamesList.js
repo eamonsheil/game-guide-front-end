@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import GameDetail from './GameDetail'
 
 function GamesList() {
@@ -14,7 +14,7 @@ function GamesList() {
     },[])
 
     const showGames = games.map((game) => {
-        return(
+        return (
             <li>
                <img src={game.image_url} alt={game.title} height="100px" width="100px"/>
                <p>Title: {game.title}</p>
@@ -46,7 +46,7 @@ function GamesList() {
          </form>
         
         <ul>
-        {showDetail? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null}
+            {showDetail? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null}
             {showDetail ? <GameDetail currentGame={currentGame}/> : showGames}
         </ul>
         

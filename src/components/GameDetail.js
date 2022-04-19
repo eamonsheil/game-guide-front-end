@@ -5,7 +5,7 @@
 function GameDetail({currentGame}) {
 
 
-    return(
+    return (
 
             <div>
                <img src={currentGame.image_url} alt={currentGame.title} height="100px" width="100px"/>
@@ -14,7 +14,7 @@ function GameDetail({currentGame}) {
                <p>Rating: {Math.floor(currentGame.rating)}</p>
                <p>Average play time: {currentGame.avg_play_time}</p>
                <p>Min/Max players: {currentGame.min_players}/{currentGame.max_players}</p>
-               <p>{currentGame.description}</p>
+               {currentGame.description}
             </div>
 
     )
