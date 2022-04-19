@@ -7,6 +7,7 @@ import {UserContext} from "./context/user"
 const defaultobj = {username: "", password: ""}
 function Home() {
     const user = useContext(UserContext)
+    console.log(user)
     const [userInfo, setUserInfo] = useState(defaultobj)
     const [isNewUser, setIsNewUser] = useState(false)
     const navigate = useNavigate()

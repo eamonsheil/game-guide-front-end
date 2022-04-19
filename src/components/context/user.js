@@ -5,7 +5,11 @@ import {createContext} from 'react'
     const UserContext = createContext()
 
     function UserProvider({children}){
-        return <UserContext.Provider value={null}>{children}</UserContext.Provider>
+        const currentUser = {
+            username: "bob",
+            password: "hi"
+        }
+        return <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
     }
 
 
