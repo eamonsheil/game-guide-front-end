@@ -1,10 +1,13 @@
-import { useState } from 'react'
-import{ useNavigate } from 'react-router-dom'
+import {useState, useContext} from 'react'
+import{useNavigate} from 'react-router-dom'
 import NewUserForm from './NewUserForm'
+import {UserContext} from "./context/user"
 
 
 const defaultobj = {username: "", password: ""}
 function Home() {
+    const user = useContext(UserContext)
+    console.log(user)
     const [userInfo, setUserInfo] = useState(defaultobj)
     const [isNewUser, setIsNewUser] = useState(false)
     const navigate = useNavigate()
