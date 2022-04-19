@@ -1,9 +1,14 @@
 import {useState, useEffect} from 'react'
 import GameDetail from './GameDetail'
+import Header from './Header'
+// import Modal from 'react-modal';
 // import ReactHtmlParser from 'react-html-parser'
 
 function GamesList() {
     const [games, setGames] = useState([])
+    const [show, setShow] = useState([false])
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [formData, setFormData] = useState({
         search:  "",
         numPlayers: 0,
@@ -20,19 +25,16 @@ function GamesList() {
         .then( data => setGames(data))
     },[])
 
+
     const showGames = games.map((game) => {
         const description = document.createElement("div")
-        console.log(game.description)
-                    //description.innerHTML = game.description
         return(
-            <div className='game-list'>
+            <div className='game-list-item'>
                 <ul>
-                    <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="100px"/>
+                    <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
-
+                    {/* short description? */}
                     {/* {ReactHtmlParser(game.description)} */}
-                    {/* <div style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;"> */}
-                    {/* </div> */}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
                 </ul>
             </div>
@@ -54,7 +56,7 @@ function GamesList() {
 
     function handleFormSubmit(event){
         event.preventDefault()
-        fetch(`http://localhost:9292/games/${formData.search}/${formData.playtime}/${formData.numPlayers}`)
+        fetch(`http://localhost:9292/search/${formData.search}/${formData.playtime}/${formData.numPlayers}`)
         .then( res => res.json())
         .then( data => setGames(data))
         .catch( error => console.log(error.message));
@@ -62,32 +64,31 @@ function GamesList() {
 
     return (
         <>
-        <h3>Welcome to Game Guide</h3>
-        <form onSubmit={handleFormSubmit}>
-            <input name="search" placeholder='Search by name....' value={formData.search} onChange={handleFormChange}/>
+        <Header />
+        <form onSubmit={event => handleFormSubmit(event)}>
+            <input name="search" placeholder='Search by name....' value={formData.search} onChange={event => handleFormChange(event)}/>
             <br/>
-            <select onChange={handleFormChange}>
+            <select name="category" onChange={event => handleFormChange(event)}>
                 <option value="all">Category </option>
-                <option>Card Game</option>
-                <option>Dice Game</option>
-                <option>Negotiation Game</option>
+                <option value="card_game">Card Game</option>
+                <option value="dice_game">Dice Game</option>
+                <option value="negotiation_game">Negotiation Game</option>
             </select>
             <label>Num players:
                 <input 
-                    onChange={handleFormChange} 
-                    //value={formData.numPlayers} 
-                    placeholder=""
+                    onChange={event => handleFormChange(event)} 
+                    value={formData.numPlayers} 
                     min="0"
-                    name="min_players" 
+                    name="numPlayers" 
                     type="number"/>
             </label>
-            <label>Available play time (in min):
+            <label>Play time (in min):
                 <input 
-                    onChange={handleFormChange} 
-                    //value={formData.numPlayers} 
+                    onChange={(event) => handleFormChange(event)} 
+                    value={formData.playtime} 
                     placeholder=""
                     min="0"
-                    name="max_players" 
+                    name="playtime" 
                     type="number"/>
             </label>
             <input type="submit"></input>
@@ -95,7 +96,7 @@ function GamesList() {
 
             
         
-        <ul>
+        <ul className='game-list'>
             {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null}
             {showDetail ? <GameDetail currentGame={currentGame}/> : showGames}
         </ul>
@@ -105,3 +106,24 @@ function GamesList() {
 }
 
 export default GamesList;
+
+
+    {/* <button onClick={handleModal}id="myBtn">Open Modal</button> */}
+
+    // function handleModal(event){
+    //     //event.target.style.display = "block"
+    //     return(
+    //         <div id="myModal" class="modal">
+
+    //             <div class="modal-content">
+    //                 <span onClick={closeModal} class="close">&times;</span>
+    //                 <p>Some text in the Modal..</p>
+    //             </div>
+    //         </div>
+    //     )
+        
+    // }
+
+    // function closeModal(event){
+    //     event.target.parent.style.display = "none"
+    // }

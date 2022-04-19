@@ -1,17 +1,19 @@
-
-
+import Header from './Header'
 
 
 function GameDetail({currentGame}) {
 
-    function getPrettyComments {
-        currentGame.game_relationships
+    function getPrettyComments(){
+        const comments = currentGame.game_relationships.map(relationship => {
+            return <p>{relationship.comment + " - "}  <strong>{relationship.user.username} </strong></p>
+        })
+        return comments
     }
 
 
     return(
-
-            <div>
+        <div>
+                <Header />
                 <img src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
                 <p><strong>Title: </strong>{currentGame.title}</p>
                 <p><strong>Categories:</strong> {currentGame.categories.split("_").join(" ")}</p>
@@ -20,7 +22,10 @@ function GameDetail({currentGame}) {
                 <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
                 {currentGame.description}
                 <div className="comments">
-                 {/* currentGame.game_relationships.comment */}
+                    <strong>User Comments:</strong>
+                    <div>
+                    {getPrettyComments()}
+                    </div>
                 </div>
             </div>
 
