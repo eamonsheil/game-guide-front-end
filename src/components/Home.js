@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import{useNavigate} from 'react-router-dom'
+import { useState } from 'react'
+import{ useNavigate } from 'react-router-dom'
 import NewUserForm from './NewUserForm'
 
 
@@ -9,7 +9,7 @@ function Home() {
     const [isNewUser, setIsNewUser] = useState(false)
     const navigate = useNavigate()
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
 
         if (userInfo.username === "eamon" && userInfo.password === "password")
@@ -20,7 +20,7 @@ function Home() {
             setIsNewUser(()=>!isNewUser)}
     }   
 
-    function handleChange({target: {value, name}}){
+    function handleChange({target: {value, name}}) {
         // const {target: {value, name}} = e
         setUserInfo({...userInfo, [name]: value})
     }
@@ -36,6 +36,7 @@ function Home() {
                 <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
                 <input type="submit"/>
             </form>
+
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
 
         </div>
