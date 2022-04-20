@@ -1,12 +1,24 @@
 import {UserContext} from "./context/user"
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
 import Header from "./Header"
 import{useNavigate} from 'react-router-dom'
+import GameDetail from "./GameDetail"
 
 
 function UserPage() {
     const [user] = useContext(UserContext)
     const navigate = useNavigate()
+    const [showDetail, setShowDetail] = useState(false)
+    const [currentGame, setCurrentGame] = useState(null)
+
+    function toggleGameDetail(game) {
+        setShowDetail(!showDetail)
+        setCurrentGame(game)
+    }
+
+    function removeFromGames(game){
+
+    }
 
     let gameDisplay
 
@@ -14,13 +26,15 @@ function UserPage() {
         const gamesToShow = user.game_relationships.map(relationship => {
             const game = (relationship.game)
             return(
-                <li className='game-list-item'>
+                <div className='game-list-item'>
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
+                    <p>{game.description}</p>
                     {/* short description? */}
                     {/* {ReactHtmlParser(game.description)} */}
                 {/* <button onClick={() => toggleGameDetail(game)}>View Details</button> */}
-                </li>
+                <button>remove from your list</button>
+                </div>
             )
         })
 
@@ -36,27 +50,21 @@ function UserPage() {
             <button onClick={()=>navigate('/games')}>FIND SOME DAMN GAMES</button>
         </div>
     }
-    //user.games
 
-    // const showGames = user.game_relationships.map((relationship) => {
-    //     game = relationship.game
-    //     return(
-    //         <li className='game-list-item'>
-    //                 <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
-    //                 <p>Title: <strong>{game.title}</strong></p>
-    //                 {/* short description? */}
-    //                 {/* {ReactHtmlParser(game.description)} */}
-    //                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
-    //         </li>
-    //     )
-    // })
     return (
         <div className="user-page">
-            <Header/>
+            <Header location="UserPage"/>
             <h2>User Page....</h2>
             <p>User: {user.username }</p>
-            {gameDisplay}
+            {/* {gameDisplay} */}
+
+            <ul className='game-list'>
+                {gameDisplay}
+                {/* {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} */}
+                {/* {showDetail ? <GameDetail currentGame={currentGame}/> : gameDisplay} */}
+            </ul>
         </div>
+                
     )
 }
 

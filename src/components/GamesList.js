@@ -62,7 +62,7 @@ function GamesList() {
 
     return (
         <>
-        <Header />
+        <Header location="GameList" />
         <form onSubmit={event => handleFormSubmit(event)}>
             <input name="search" placeholder='Search by name....' value={formData.search} onChange={event => handleFormChange(event)}/>
             <br/>

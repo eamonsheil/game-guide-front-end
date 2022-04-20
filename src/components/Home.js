@@ -53,7 +53,7 @@ function Home() {
     }
 
     return (
-        <div>
+        <div className='login'>
             <h1>Homepage</h1>
 
             <form type="submit" onSubmit={handleSubmit}>
