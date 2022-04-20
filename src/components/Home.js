@@ -26,7 +26,7 @@ function Home() {
             if (data){
                 console.log("there's data!")
                 setTestUser({user: data.username, password:data.password})
-                console.log(testUser)
+                console.log("current testUser:", testUser)
             }
         })
 
