@@ -3,7 +3,9 @@ import {useContext} from 'react'
 import Header from "./Header"
 
 function UserPage() {
-    const user = useContext(UserContext)
+    const [user] = useContext(UserContext)
+    console.log(user.game_relationships)
+    //user.games
 
     return (
         <div className="user-page">

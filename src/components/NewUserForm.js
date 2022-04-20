@@ -1,21 +1,30 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import{useNavigate} from 'react-router-dom'
+import {UserContext} from "./context/user"
+
 
 function NewUserForm({setIsNewUser, isNewUser}){
+    const [user, setUser] = useContext(UserContext)
+    const navigate = useNavigate()
+
+
     const [newUserInfo, setNewUserInfo] = useState({
-        newUsername: '',
-        newUserPassword: ''
+        username: '',
+        password: ''
     })
 
     function handleFormChange(event){
         setNewUserInfo({
-            ...FormData,
+            ...newUserInfo,
             [event.target.name] : event.target.value
         })
     }
 
     function handleSubmit(e){
         e.preventDefault()
-        setIsNewUser(()=>!isNewUser)
+        //setIsNewUser(()=>!isNewUser)
+        console.log(newUserInfo)
+
         fetch(`http://localhost:9292/users/`, {
             method: "POST",
             headers: {
@@ -23,12 +32,18 @@ function NewUserForm({setIsNewUser, isNewUser}){
                 Accept: "application/json"
             },
             body: JSON.stringify({
-                newUserInfo
+                password: newUserInfo.password,
+                username: newUserInfo.username
             })
         })
         .then( res => res.json())
-        .then( data => setNewUserInfo(data))
+        .then( data => {
+            console.log(data)
+            setUser(data)
+            navigate('/games')
+        })
         .catch( error => console.log(error.message));
+
     }
 
 
@@ -39,21 +54,20 @@ function NewUserForm({setIsNewUser, isNewUser}){
         <form onSubmit={handleSubmit}>
             <table>
             <tr>
-                <td> <label for="name">Name: </label></td>
-                <td><input onChange={handleFormChange} type="text" name="name"/></td>
+                <td> <label>Name: </label></td>
+                <td><input name="username" onChange={handleFormChange} type="text" /></td>
             </tr>
             <tr>
                 <td>
-                    <label for="password">Pasword:</label>
+                    <label>Password:</label>
                 </td>
                 <td>
-                    <input  onChange={handleFormChange} type="text" name="password"/>
+                    <input name="password" onChange={handleFormChange} type="text" />
                 </td>
             </tr>
             <tr>
                 <input type="submit"/>
             </tr>
-
             </table>
         </form>
         </div>
