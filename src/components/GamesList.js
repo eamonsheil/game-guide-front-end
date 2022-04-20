@@ -29,15 +29,15 @@ function GamesList() {
     const showGames = games.map((game) => {
         const description = document.createElement("div")
         return(
-            <div className='game-list-item'>
-                <ul>
+            <li className='game-list-item'>
+               
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                     {/* short description? */}
                     {/* {ReactHtmlParser(game.description)} */}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                </ul>
-            </div>
+
+            </li>
         )
     })
 
