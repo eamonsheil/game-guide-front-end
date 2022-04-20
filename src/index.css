@@ -42,11 +42,14 @@ button {
 
 .game-list-item{
   /* border: 2px solid #C1CFDA; */
-  padding: .5em;
+  padding: .25em;
   margin: .5em;
   border-radius: 10px;
-  background-color:#20A4F3;
+  /* background-color:#20A4F3; */
   transition: all .5s ease-in-out; 
+  background: rgba(51, 53, 170, 0.4)    /*  40% opaque green */ 
+
+  /* opacity: 0.6; */
 }
 
 .game-list-item:hover{
@@ -57,15 +60,19 @@ button {
 .game-list-item img {
   /* border: 2px #C1CFDA solid; */
   /* box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue; */
-
   box-shadow: 1px 1px 10px white, 1px 1px 5px #C1CFDA, 2px 2px 5px #59adde;
-
   border-radius: 8px;
 }
 
 .game-list-item button {
-  background-color:#08C4B1;
+  background-color:#189084;
 }
+
+.game-list-item button:hover {
+  background-color:#24c2b2;
+}
+
+
 div {
   padding: .5em;
 }
@@ -89,7 +96,17 @@ div {
 }
 
 .header button{
-  padding: 0em;
+  padding: .3em;
+  transition: all .5s ease-in-out; 
+  opacity: .6;
+  background-color: #2fc0b1;
+  border-radius: .8em;
+
+}
+.header button:hover{
+  transform: scale(1.1); 
+  background-color: #64cfc4;
+
 }
 /* ------------------- GameDetail ---------------------- */
 /* .game-detail {
