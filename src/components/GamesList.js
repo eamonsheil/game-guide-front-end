@@ -1,25 +1,31 @@
 import { useState, useEffect } from 'react'
 import GameDetail from './GameDetail'
 import Header from './Header'
+import AddToGamesForm from './AddToGamesForm'
 // import Modal from 'react-modal';
 // import ReactHtmlParser from 'react-html-parser'
+
+const defaultObj = {
+    search:  "",
+    numPlayers: 999,
+    playtime: 9999,
+    category: "all"
+}
 
 function GamesList() {
     const [games, setGames] = useState([])
     const [show, setShow] = useState([false])
+    const [showGameForm, setShowGameForm] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [formData, setFormData] = useState({
-        search:  "",
-        numPlayers: 0,
-        playtime: 0,
-        category: "all"
-    })
+    const [formData, setFormData] = useState(defaultObj)
     //const [search, setSearch] = useState("")
     const [showDetail, setShowDetail] = useState(false)
     const [currentGame, setCurrentGame] = useState({})
 
     useEffect(() => {
+        console.log(formData)
+
         fetch(`http://localhost:9292/games_with_comments`)
         .then( res => res.json())
         .then( data => setGames(data))
@@ -27,14 +33,20 @@ function GamesList() {
 
 
     const showGames = games.map((game) => {
-        const description = document.createElement("div")
+        // const description = document.createElement("div")
         return(
-            <li className='game-list-item'>
+
+            <li className='game-list-item' key={game.id}>
+               
+
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                     {/* short description? */}
                     {/* {ReactHtmlParser(game.description)} */}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
+                    <button onClick={() => setShowGameForm(!showGameForm)}>Add to My Games</button>
+                    {showGameForm? <AddToGamesForm currentGame={currentGame}/> : null}
+
             </li>
         )
     })
@@ -54,10 +66,22 @@ function GamesList() {
 
     function handleFormSubmit(event){
         event.preventDefault()
+        console.log(formData)
+
+        if (!formData.search) {
+            fetch(`http://localhost:9292/search/${formData.playtime}/${formData.numPlayers}`)
+        .then( res => res.json())
+        .then( data => setGames(data))
+        .catch( error => console.log(error.message));
+        }
+        else {
+        
         fetch(`http://localhost:9292/search/${formData.search}/${formData.playtime}/${formData.numPlayers}`)
         .then( res => res.json())
         .then( data => setGames(data))
         .catch( error => console.log(error.message));
+        
+        }
     }
 
     return (
@@ -93,11 +117,11 @@ function GamesList() {
             </form>
 
             
+            {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
-        <ul className='game-list'>
-            {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null}
-            {showDetail ? <GameDetail currentGame={currentGame}/> : showGames}
-        </ul>
+            {showDetail ? <GameDetail currentGame={currentGame}/> : null}
+
+             <ul className='game-list'> {showGames} </ul>
         
         </>
     )
