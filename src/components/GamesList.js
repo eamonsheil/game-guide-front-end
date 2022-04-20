@@ -35,8 +35,10 @@ function GamesList() {
     const showGames = games.map((game) => {
         // const description = document.createElement("div")
         return(
+
             <li className='game-list-item' key={game.id}>
                
+
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                     {/* short description? */}
@@ -44,6 +46,7 @@ function GamesList() {
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
                     <button onClick={() => setShowGameForm(!showGameForm)}>Add to My Games</button>
                     {showGameForm? <AddToGamesForm currentGame={currentGame}/> : null}
+
             </li>
         )
     })
@@ -83,7 +86,7 @@ function GamesList() {
 
     return (
         <>
-        <Header />
+        <Header location="GameList" />
         <form onSubmit={event => handleFormSubmit(event)}>
             <input name="search" placeholder='Search by name....' value={formData.search} onChange={event => handleFormChange(event)}/>
             <br/>

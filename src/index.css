@@ -1,3 +1,6 @@
+*{
+  color: #03191E
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,31 +10,82 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  margin: .5em;
+}
+
+.App {
+  background-color: #C1CFDA;
+}
+
+
+
+.login button {
+  background-color: #0B5D6F;
+  padding: 1em;
+  border-radius: 50%;
+  font-size: 1em;
+}
+
+.login button:hover{
+  background-color: #888;
 }
 
 .game-list{
-  background-color: aliceblue;
+  background-color: #08C4B1;
+  flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
+  padding: 1em
 }
 
 .game-list-item{
-  border: 2px solid black;
-  padding: .75em;
-  margin: .1em
-  
+  /* border: 2px solid #C1CFDA; */
+  padding: .5em;
+  margin: .5em;
+  border-radius: 10px;
+  background-color:#20A4F3;
+  transition: all .5s ease-in-out; 
+}
 
+.game-list-item:hover{
+  transform: scale(1.1); 
+
+}
+
+.game-list-item img {
+  /* border: 2px #C1CFDA solid; */
+  /* box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue; */
+
+  box-shadow: 1px 1px 10px white, 1px 1px 5px #C1CFDA, 2px 2px 5px #59adde;
+
+  border-radius: 8px;
+}
+
+.game-list-item button {
+  background-color:#08C4B1;
 }
 div {
   padding: .5em;
 }
 
+.login{
+  background-color: #20A4F3;
+}
+
+.login form {
+  background-color: #08C4B1;
+  margin: 2em;
+  padding: 2em;
+}
+
 .header{
-  background-color: #888;
+  background: rgb(2,0,36);
+  background: radial-gradient(circle, #9e4553 0%, #941C2F 35%, #4c1019 100%);
+  border: 5px solid silver;
+  border-style: inset;
+  border-radius: 20px;
 }
 
 .header button{

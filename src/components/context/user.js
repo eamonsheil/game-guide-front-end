@@ -1,15 +1,16 @@
 import Home from "../Home";
-import {createContext} from 'react'
+import {createContext, useState} from 'react'
 
 
     const UserContext = createContext()
 
     function UserProvider({children}){
-        const currentUser = {
+        const [currentUser, setCurrentUser] = useState({
             username: "bob",
             password: "hi"
-        }
-        return <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+        })
+
+        return <UserContext.Provider value={[currentUser, setCurrentUser]}>{children}</UserContext.Provider>
     }
 
 
