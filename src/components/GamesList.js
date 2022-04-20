@@ -7,8 +7,8 @@ import AddToGamesForm from './AddToGamesForm'
 
 const defaultObj = {
     search:  "",
-    numPlayers: 999,
-    playtime: 9999,
+    numPlayers: 0,
+    playtime: 0,
     category: "all"
 }
 
@@ -24,12 +24,14 @@ function GamesList() {
     const [currentGame, setCurrentGame] = useState({})
 
     useEffect(() => {
-        console.log(formData)
+        getAllGames()
+    },[])
 
+    function getAllGames() {
         fetch(`http://localhost:9292/games_with_comments`)
         .then( res => res.json())
         .then( data => setGames(data))
-    },[])
+    }
 
 
     const showGames = games.map((game) => {
@@ -41,8 +43,6 @@ function GamesList() {
 
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
-                    {/* short description? */}
-                    {/* {ReactHtmlParser(game.description)} */}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
                     <button onClick={() => setShowGameForm(!showGameForm)}>Add to My Games</button>
                     {showGameForm? <AddToGamesForm currentGame={currentGame}/> : null}
@@ -62,25 +62,34 @@ function GamesList() {
             ...formData,
             [event.target.name] : event.target.value
         })
+        if (!formData.search){
+        console.log(formData)
+            getAllGames()}
     }
 
-    function handleFormSubmit(event){
+    function handleFormSubmit(event) {
         event.preventDefault()
         console.log(formData)
-
-        if (!formData.search) {
-            fetch(`http://localhost:9292/search/${formData.playtime}/${formData.numPlayers}`)
-        .then( res => res.json())
-        .then( data => setGames(data))
-        .catch( error => console.log(error.message));
+        const playtime = (!formData.playtime? 9999 : formData.playtime)
+        const numPlayers = (!formData.numPlayers? 999 : formData.numPlayers)
+        console.log("playtime:", playtime, "numPlayers:", numPlayers)
+        
+        if (formData.category === "all"){
+            if (!formData.search) {
+                fetch(`http://localhost:9292/search/${playtime}/${numPlayers}`)
+                .then( res => res.json())
+                .then( data => setGames(data))
+                .catch( error => console.log(error.message));
+            }
+            else {        
+                fetch(`http://localhost:9292/search/${formData.search}/${playtime}/${numPlayers}`)
+                .then( res => res.json())
+                .then( data => setGames(data))
+                .catch( error => console.log(error.message));        
+            }
         }
         else {
-        
-        fetch(`http://localhost:9292/search/${formData.search}/${formData.playtime}/${formData.numPlayers}`)
-        .then( res => res.json())
-        .then( data => setGames(data))
-        .catch( error => console.log(error.message));
-        
+
         }
     }
 

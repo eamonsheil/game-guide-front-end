@@ -3,7 +3,9 @@ import Header from './Header'
 
 function GameDetail({currentGame}) {
 
-    console.log(currentGame)
+
+    const showDescription = {__html: currentGame.description}
+    console.log("currentGame", currentGame, "relationships", currentGame.game_relationships)
     function getPrettyComments(){
         const comments = currentGame.game_relationships.map(relationship => {
             return <p>{relationship.comment + " - "}  <strong>{relationship.user.username} </strong></p>
@@ -14,7 +16,6 @@ function GameDetail({currentGame}) {
 
     return(
         <div>
-                <Header />
                 <img class="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
                 
                 <div class="game-detail-info">
@@ -23,7 +24,8 @@ function GameDetail({currentGame}) {
                     <p><strong>Rating: </strong>{Math.floor(currentGame.rating)} / 10</p>
                     <p><strong>Play time:</strong> {currentGame.min_play_time} - {currentGame.max_play_time} minutes</p>
                     <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
-                    {currentGame.description}
+                    <div dangerouslySetInnerHTML={showDescription}/>
+                    
                 </div>
                 <div className="comments">
                     <strong>User Comments:</strong>

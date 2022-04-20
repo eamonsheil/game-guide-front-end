@@ -3,7 +3,7 @@ import{useNavigate} from 'react-router-dom'
 import {useContext} from 'react'
 
 function Header({location}){
-    console.log(location)
+    // console.log(location)
     const [user, setUser] = useContext(UserContext)
     const navigate = useNavigate()
 
