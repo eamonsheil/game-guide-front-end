@@ -53,6 +53,7 @@ function GamesList() {
 
     function toggleGameDetail(game) {
         //console.log(currentGame, showDetail)
+        // console.log(game)
         setShowDetail(!showDetail)
         setCurrentGame(game)
     }
@@ -122,13 +123,15 @@ function GamesList() {
                     name="playtime" 
                     type="number"/>
             </label>
+            <div>
             <input type="submit"></input>
+            </div>
             </form>
 
             
             {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
-            {showDetail ? <GameDetail currentID={currentGame.id}/> : null}
+            {showDetail ? <GameDetail detailID={currentGame.id}/> : null}
 
              <ul className='game-list'> {showGames} </ul>
         
