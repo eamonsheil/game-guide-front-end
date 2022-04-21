@@ -17,9 +17,15 @@ function UserPage() {
     }
 
     function removeFromGames(game){
-
+        fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
+            method: "DELETE"
+        })
+        .then( res => res.json())
+        .then( data => console.log(data))
+        .catch( error => console.log(error.message));
     }
 
+    // if(user === null){navigate('/games')}
     let gameDisplay
 
     if(user.game_relationships){
@@ -30,7 +36,7 @@ function UserPage() {
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                <button>remove from your list</button>
+                <button onClick={() => removeFromGames(game)}>remove from your list</button>
                 </div>
             )
         })

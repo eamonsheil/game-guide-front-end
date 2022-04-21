@@ -1,31 +1,82 @@
+import {useState, useContext} from 'react'
+import {UserContext} from "./context/user"
 
 
+function AddToGamesForm({currentGame}) {
+    const [user, setUser] = useContext(UserContext)
 
-function addToGamesForm({currentGame}) {
+    const [formData, setFormData] = useState({
+        game_id: currentGame.id,
+        owned: false,
+        played: false,
+        liked: false,
+        comment: "",
+        hours_played: 0
+    })
+
+    function handleFormChange(event){
+        setFormData({
+            ...formData,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    function handleCheckChange(event){
+        setFormData({
+            ...formData,
+            [event.target.name] : event.target.checked
+        })
+    }
 
     function addToMyGames(e) {
-
         e.preventDefault()
-        console.log("added", currentGame)
+        // const newRelationship = {
+        //     game_id: currentGame.id,
+        //     owned: formData.owned,
+        //     played: formData.played,
+        //     liked: formData.liked,
+        //     comment: formData.comment,
+        //     hours_played: formData.hours_played
+        // }
+        // console.log("added", newRelationship)
+        fetch(`http://localhost:9292/game_relationships`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                game_id: currentGame.id,
+                user_id: user.id,
+                owned: formData.owned,
+                played: formData.played,
+                liked: formData.liked,
+                comment: formData.comment,
+                hours_played: formData.hours_played
+            })
+        })
+        .then( res => res.json())
+        .then( data => console.log(data))
+        .catch( error => console.log(error.message));
     }
 
     return (
         <div>
             <form onSubmit={addToMyGames}>
                 
-                    <label for="isOwned">Do you own this game?</label>
-                    <input type="checkbox" name="isOwned"></input>
+                    <label>Do you own this game?</label>
+                    <input onChange={handleCheckChange} type="checkbox" name="owned"></input>
                     <br/>
-                    <label for="havePlayed">Have you played it?</label>
-                    <input type="checkbox" name="havePlayed"></input>
+                    <label >Have you played it?</label>
+                    <input  onChange={handleCheckChange}  type="checkbox" name="played"></input>
                     <br/>
-                    <label for="hoursPlayed">If yes, for how many total hours?</label>
-                    <input type="number" name="hoursPlayed"></input>
+                    <label >If yes, for how many total hours?</label>
+                    <input  onChange={handleFormChange} type="number" name="hours_played"></input>
                     <br/>
-                    <label for="didEnjoy">Did you like it?</label>
-                    <input type="checkbox" name="didEnjoy"></input>
+                    <label >Did you like it?</label>
+                    <input  onChange={handleCheckChange} type="checkbox" name="liked"></input>
                     <br/>
-                    <input type="text" name="comment" placeholder="Any thoughts?"></input>
+                    <input  onChange={handleFormChange} type="text" name="comment" placeholder="Any comments to add?"></input>
 
                     <input type="submit"/>
             </form>
@@ -33,4 +84,4 @@ function addToGamesForm({currentGame}) {
     )
 }
 
-export default addToGamesForm
+export default AddToGamesForm

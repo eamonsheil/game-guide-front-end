@@ -39,7 +39,6 @@ function GamesList() {
         return(
 
             <li className='game-list-item' key={game.id}>
-               
 
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
@@ -133,7 +132,7 @@ function GamesList() {
         
             {showDetail ? <GameDetail detailID={currentGame.id}/> : null}
 
-             <ul className='game-list'> {showGames} </ul>
+            <ul className='game-list'> {showGames} </ul>
         
         </>
     )
