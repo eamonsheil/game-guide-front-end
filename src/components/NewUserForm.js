@@ -26,13 +26,22 @@ function NewUserForm({setIsNewUser, isNewUser}){
             [event.target.name] : event.target.value
         })
     }
+    function handleOptionChange(e) {
+        console.log(e.target.value)
+            setNewUserInfo({
+                ...newUserInfo, profile_pic: e.target.value
+            })
+    }
 
     function handleSubmit(e){
         e.preventDefault()
-        //setIsNewUser(()=>!isNewUser)
-        console.log(newUserInfo)
-
-        fetch(`http://localhost:9292/users/`, {
+        if (newUserInfo.password === "" || newUserInfo.username === "" || newUserInfo.profile_pic === ""){
+            alert("You must have a username AND a password!")
+        }
+        
+        else {
+            
+        fetch(`http://localhost:9292/users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,18 +49,18 @@ function NewUserForm({setIsNewUser, isNewUser}){
             },
             body: JSON.stringify({
                 password: newUserInfo.password,
-                username: newUserInfo.username
+                username: newUserInfo.username,
+                profile_pic_id: newUserInfo.profile_pic
             })
         })
         .then( res => res.json())
         .then( data => {
-            console.log(data)
             setUser(data)
             navigate('/games')
         })
         .catch( error => console.log(error.message));
 
-    }
+    }}
 
 
 
@@ -59,29 +68,26 @@ function NewUserForm({setIsNewUser, isNewUser}){
         <div>
             <h4>New user? Create an account here</h4>
         <form onSubmit={handleSubmit}>
-            <table>
-            <tr>
-                <td> <label>Name: </label></td>
-                <td><input name="username" onChange={handleFormChange} type="text" /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Password:</label>
-                </td>
-                <td>
-                    <input name="password" onChange={handleFormChange} type="text" />
-                </td>
-            </tr>
-            <tr>
+            <label>Name: </label>
+                <input name="username" onChange={handleFormChange} type="text" />
+                <br/>
+            <label>Password:</label>
+                <input name="password" onChange={handleFormChange} type="password" />
+              
+                
+                
+                <h6>Choose a Profile Picture:</h6>
+                <div className='avatar-select' >
+                    {profilePics.map((pic) => 
+                        (
+                            <label for="profile_pic">
+                                <img id={pic.id} src={pic.picture_src} alt={pic.alt_text} style={{height: 50}}/>
+                                <input id={pic.id} type="radio" name="profile_pic" value={pic.id} onChange={handleOptionChange}/>
+                            </label>
+                        )
+                    )}
+                </div>
                 <input type="submit"/>
-            </tr>
-            </table>
-            <label for="profile_pic">Choose a Profile Picture:</label>
-                <input type="select">
-                    {profilePics.map((pic) => (
-                        <option></option>
-                    ))}
-                </input>
         </form>
         </div>
     )
