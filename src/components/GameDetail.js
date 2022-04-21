@@ -47,6 +47,7 @@ function GameDetail({detailID}) {
             )
         })
         return comments
+    
     }
 
     const prettySimilarGames = similarGames.map(game => {
