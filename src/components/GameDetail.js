@@ -81,8 +81,8 @@ function GameDetail({detailID}) {
                     {getPrettyComments()}
                     </div>
                 </div>
-                <div>
-                    <p>{prettySimilarGames.length > 0 ? "Check out some similar games!" : "this game is unique"}</p>
+                <p>{prettySimilarGames.length > 0 ? "Check out some similar games!" : "this game is unique"}</p>
+                <div className='similar-game-bin'>
                     {prettySimilarGames}
                 </div>
             </div>

@@ -45,7 +45,7 @@ function GamesList() {
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                     <div>
-                        <p>mechanics:</p>
+                        <p>highlights:</p>
                         {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
                         {game.categories.includes("card_game") ? <>🃏</> : null}
                         {game.categories.includes("cooperative") ? <>🤝</> : null}

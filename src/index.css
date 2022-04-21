@@ -9,6 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #c1d8da;
+
 }
 
 button {
@@ -64,14 +66,15 @@ button {
   margin-right: 1em;
 }
 
-.login button {
-  background-color: #0B5D6F;
+.login button, .login-submit {
+  background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
   font-size: 1em;
+  color:#3dafa4;
 }
 
-.login button:hover{
+.login button:hover, .login-submit:hover{
   background-color: #888;
 }
 
@@ -87,6 +90,16 @@ button {
 
 }
 
+.similar-game {
+  width: 15em;
+}
+
+.similar-game-bin {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+}
+
 .game-list-item, .similar-game, .saved-game-item {
   border: 2px solid white;
   padding: .25em;
@@ -99,7 +112,7 @@ button {
   /* opacity: 0.6; */
 }
 
-.game-list-item:hover{
+.game-list-item:hover, .saved-game-item:hover{
   transform: scale(1.1); 
 
 }
@@ -127,25 +140,36 @@ div {
 
 .login{
   background-color: #20A4F3;
+  background-image: url("https://images.squarespace-cdn.com/content/v1/595d019ed2b857b047abe776/1569616755409-5IEMJ3AGVPSY63ELNOQG/Board+Game+1.jpg?format=1500w");
+
 }
 
 .login form {
-  background-color: #08C4B1;
+  background: rgba(51, 130, 170, 0.3) ;
   margin: 2em;
   padding: 2em;
   border: #03191E 2px solid;
+  border-radius: 20px;
 }
 
-.header{
-  background: rgb(2,0,36);
-  background: radial-gradient(circle, #9e4553 0%, #941C2F 35%, #4c1019 100%);
+.header {
+  background: url("https://cdn.vox-cdn.com/thumbor/binv_0z0i-bJE4-tmbjcoVXAr0I=/100x0:1180x720/1200x800/filters:focal(100x0:1180x720)/cdn.vox-cdn.com/uploads/chorus_image/image/45728350/catan.0.0.jpg");
+  /* background: radial-gradient(circle, #9e4553 0%, #941C2F 35%, #4c1019 100%); */
   border: 5px solid silver;
   border-style: inset;
   border-radius: 20px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 2em;
 }
+
+h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 3em;
+  margin-bottom: 0em;
+}
+
 .header h3 {
+  color: #82bdb7;
   padding: 0em;
   margin: 0em;
 }

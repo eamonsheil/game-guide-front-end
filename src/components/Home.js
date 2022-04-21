@@ -61,11 +61,11 @@ function Home() {
                 <label >Enter your password:</label>
                 <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
                 <div></div>
-                <input type="submit"/>
+                <input className='login-submit' type="submit"/>
             </form>
 
-            <button onClick={beGuest}>continue as guest</button>
-            <br/>
+            <button onClick={beGuest}>Continue as Guest</button>
+            {/* <br/> */}
             <button onClick={() => setIsNewUser(!isNewUser)}>Create an Account</button>
 
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
