@@ -14,7 +14,6 @@ function Home() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log("whats in the form: ", userInfo)
         if(userInfo.username ===""){
             alert("please enter username!")
         }
@@ -22,9 +21,7 @@ function Home() {
         fetch(`http://localhost:9292/users/by-username/${userInfo.username}`)
         .then( res => res.json())
         .then( data => {
-            console.log(data)
             if (data){
-                // console.log(data.username === userInfo.username && data.password===userInfo.password)
                 if(userInfo.username === data.username && userInfo.password === data.password){
                     setUser(data)
                     navigate("/games")
@@ -65,7 +62,7 @@ function Home() {
                 <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
                 <input type="submit"/>
             </form>
-            
+
             <button onClick={beGuest}>continue as guest</button>
             <br/>
             <button onClick={() => setIsNewUser(!isNewUser)}>Create an Account</button>
@@ -73,8 +70,6 @@ function Home() {
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
 
         </div>
-        
-
 
     )
 }

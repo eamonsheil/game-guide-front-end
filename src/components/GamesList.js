@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import GameDetail from './GameDetail'
 import Header from './Header'
 import AddToGamesForm from './AddToGamesForm'
+import {UserContext} from "./context/user"
 // import Modal from 'react-modal';
 // import ReactHtmlParser from 'react-html-parser'
 
@@ -13,6 +14,8 @@ const defaultObj = {
 }
 
 function GamesList() {
+    const [user, setUser] = useContext(UserContext)
+
     const [games, setGames] = useState([])
     const [show, setShow] = useState([false])
     const [showGameForm, setShowGameForm] = useState(false)
@@ -33,7 +36,6 @@ function GamesList() {
         .then( data => setGames(data))
     }
 
-
     const showGames = games.map((game) => {
         // const description = document.createElement("div")
         return(
@@ -42,13 +44,26 @@ function GamesList() {
 
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
+                    <div>
+                        <p>mechanics:</p>
+                        {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
+                        {game.categories.includes("card_game") ? <>🃏</> : null}
+                        {game.categories.includes("cooperative") ? <>🤝</> : null}
+                        {game.categories.includes("party_game") ? <>🎉</> : null}
+
+                    </div>
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                    <button onClick={() => setShowGameForm(!showGameForm)}>Add to My Games</button>
-                    {showGameForm? <AddToGamesForm currentGame={currentGame}/> : null}
+                    {user ? <button onClick={() => toggleGameForm(game)}>Add to My Games</button> : null}
+                    {showGameForm? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null}
 
             </li>
         )
     })
+
+    function toggleGameForm(game){
+        setShowGameForm(!showGameForm)
+        setCurrentGame(game)
+    }
 
     function toggleGameDetail(game) {
         //console.log(currentGame, showDetail)

@@ -19,7 +19,15 @@ button {
   background-color: #C1CFDA;
 }
 
+#game-detail {
+  background-color: #0B5D6F;
+}
 
+#game-detail-img {
+  border: 2px solid white;
+  box-shadow: 1px 1px 10px white, 1px 1px 5px #C1CFDA, 2px 2px 5px #59adde;
+  border-radius: 8px;
+}
 
 .login button {
   background-color: #0B5D6F;

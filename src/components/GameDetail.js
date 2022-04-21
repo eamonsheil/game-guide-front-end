@@ -37,13 +37,13 @@ function GameDetail({detailID}) {
     function getPrettyComments(){
         const comments = currentGame.game_relationships.map(relationship => {
             return (
-            <>
+            <div key={uuid}>
             <img src={relationship.user.profile_pic.picture_src} 
             alt={relationship.user.profile_pic.alt_text}
             height="50"
             />
             <p><strong>{relationship.user.username} </strong> {relationship.comment + " - "} </p>
-            </>
+            </div>
             )
         })
         return comments
@@ -59,9 +59,9 @@ function GameDetail({detailID}) {
 
 
     return(
-        <div>
+        <div id='game-detail'>
 
-                <img className="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
+                <img id="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
 
                 
                 <div className="game-detail-info">
@@ -81,7 +81,7 @@ function GameDetail({detailID}) {
                     </div>
                 </div>
                 <div>
-                    <p> similar games!</p>
+                    <p>{prettySimilarGames.length > 0 ? "Check out some similar games!" : "this game is unique"}</p>
                     {prettySimilarGames}
                 </div>
             </div>

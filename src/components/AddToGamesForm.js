@@ -30,6 +30,7 @@ function AddToGamesForm({currentGame}) {
 
     function addToMyGames(e) {
         e.preventDefault()
+        console.log(formData.game_id)
         // const newRelationship = {
         //     game_id: currentGame.id,
         //     owned: formData.owned,
