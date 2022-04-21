@@ -25,12 +25,15 @@ function UserPage() {
     }
 
 
-    function removeFromGames(game){
+    function removeFromGames(game, event){
         fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
             method: "DELETE"
         })
         .then( res => res.json())
-        .then( data => console.log(data))
+        .then( data => {
+            console.log(data)
+            // event.target.parent.remove()
+        })
         .catch( error => console.log(error.message));
     }
 
@@ -44,7 +47,7 @@ function UserPage() {
                     <img className="saved-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                <button onClick={() => removeFromGames(game)}>remove from your list</button>
+                <button onClick={(event) => removeFromGames(game, event)}>remove from your list</button>
                 </li>
             )
         })
