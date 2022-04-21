@@ -7,7 +7,12 @@ import {createContext, useState} from 'react'
     function UserProvider({children}){
         const [currentUser, setCurrentUser] = useState({
             username: "bob",
-            password: "password",
+            password: "hi",
+            profile_pic: {
+                picture_src: "https://cdn.mos.cms.futurecdn.net/C9JVYkqCELkdERaqd9gFbj.jpg",
+                alt_text: "a beauteus gent"
+            }
+
         })
 
         return <UserContext.Provider value={[currentUser, setCurrentUser]}>{children}</UserContext.Provider>
