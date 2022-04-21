@@ -7,7 +7,15 @@ function GameDetail({currentGame}) {
     console.log("currentGame", currentGame, "relationships", currentGame.game_relationships)
     function getPrettyComments(){
         const comments = currentGame.game_relationships.map(relationship => {
-            return <p>{relationship.comment + " - "}  <strong>{relationship.user.username} </strong></p>
+            return (
+            <>
+            <img src={relationship.user.profile_pic.picture_src} 
+            alt={relationship.user.profile_pic.alt_text}
+            height="50"
+            />
+            <p><strong>{relationship.user.username} </strong> {relationship.comment + " - "} </p>
+            </>
+            )
         })
         return comments
     }
