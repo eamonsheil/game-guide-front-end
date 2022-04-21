@@ -65,8 +65,11 @@ function Home() {
                 <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
                 <input type="submit"/>
             </form>
+           
 
             <button onClick={beGuest}>continue as guest</button>
+            <br/>
+            <button onClick={() => setIsNewUser(!isNewUser)}>Create an Account</button>
 
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
 

@@ -1,17 +1,24 @@
-import {useState, useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 import{useNavigate} from 'react-router-dom'
 import {UserContext} from "./context/user"
 
-
+const newUserObj = {
+    username: '',
+    password: '',
+    profile_pic: ''
+}
 function NewUserForm({setIsNewUser, isNewUser}){
     const [user, setUser] = useContext(UserContext)
+    const [profilePics, setProfilePics] = useState([])
     const navigate = useNavigate()
+    const [newUserInfo, setNewUserInfo] = useState(newUserObj)
 
+    useEffect(() => {
+        fetch(`http://localhost:9292/profile_pics`)
+        .then( res => res.json())
+        .then( data => setProfilePics(data))
+    },[])
 
-    const [newUserInfo, setNewUserInfo] = useState({
-        username: '',
-        password: ''
-    })
 
     function handleFormChange(event){
         setNewUserInfo({
@@ -69,6 +76,12 @@ function NewUserForm({setIsNewUser, isNewUser}){
                 <input type="submit"/>
             </tr>
             </table>
+            <label for="profile_pic">Choose a Profile Picture:</label>
+                <input type="select">
+                    {profilePics.map((pic) => (
+                        <option></option>
+                    ))}
+                </input>
         </form>
         </div>
     )
