@@ -8,12 +8,12 @@ import AddToGamesForm from './AddToGamesForm'
 const defaultObj = {
     search:  "",
     numPlayers: 0,
-    playtime: 0,
-    category: "all"
+    playtime: 0
 }
 
 function GamesList() {
     const [games, setGames] = useState([])
+    const [filteredGames, setFilteredGames] = useState([])
     const [show, setShow] = useState([false])
     const [showGameForm, setShowGameForm] = useState(false)
     const handleClose = () => setShow(false);
@@ -39,8 +39,6 @@ function GamesList() {
         return(
 
             <li className='game-list-item' key={game.id}>
-               
-
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
@@ -64,8 +62,15 @@ function GamesList() {
             [event.target.name] : event.target.value
         })
         if (!formData.search){
-        console.log(formData)
+        // console.log(formData)
             getAllGames()}
+    }
+    function handleCategoryChange(e) {
+
+        const filteredGames = games.filter(game => (
+            game.categories.includes(e.target.value)
+        ))
+        e.target.value === "all" ? getAllGames() : setGames(filteredGames)
     }
 
     function handleFormSubmit(event) {
@@ -74,8 +79,7 @@ function GamesList() {
         const playtime = (!formData.playtime? 9999 : formData.playtime)
         const numPlayers = (!formData.numPlayers? 999 : formData.numPlayers)
         console.log("playtime:", playtime, "numPlayers:", numPlayers)
-        
-        if (formData.category === "all"){
+
             if (!formData.search) {
                 fetch(`http://localhost:9292/search/${playtime}/${numPlayers}`)
                 .then( res => res.json())
@@ -88,24 +92,18 @@ function GamesList() {
                 .then( data => setGames(data))
                 .catch( error => console.log(error.message));        
             }
-        }
-        else {
-
-        }
+        setFormData(defaultObj)
     }
 
     return (
         <>
         <Header location="GameList" />
         <form onSubmit={event => handleFormSubmit(event)}>
-            <input name="search" placeholder='Search by name....' value={formData.search} onChange={event => handleFormChange(event)}/>
+            <input name="search" 
+            placeholder='Search by name....' 
+            value={formData.search} 
+            onChange={event => handleFormChange(event)}/>
             <br/>
-            <select name="category" onChange={event => handleFormChange(event)}>
-                <option value="all">Category </option>
-                <option value="card_game">Card Game</option>
-                <option value="dice_game">Dice Game</option>
-                <option value="negotiation_game">Negotiation Game</option>
-            </select>
             <label>Num players:
                 <input 
                     onChange={event => handleFormChange(event)} 
@@ -127,7 +125,15 @@ function GamesList() {
             <input type="submit"></input>
             </div>
             </form>
-
+            <label for="category">filter by category</label>
+            <br/>
+            <select name="category" onChange={(e) => handleCategoryChange(e)} >
+                <option value="all">Category </option>
+                <option value="card_game">Card Game</option>
+                <option value="dice">Dice Game</option>
+                <option value="negotiation">Negotiation Game</option>
+                <option value="party_game">Party Game</option>
+            </select>
             
             {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         

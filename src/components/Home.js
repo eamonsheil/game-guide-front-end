@@ -38,7 +38,6 @@ function Home() {
                 alert("Invalid login!")
                 setUserInfo(defaultobj)
                 setIsNewUser(()=>true)}
-
             }
         )
     }   
@@ -48,7 +47,7 @@ function Home() {
     }
 
     function beGuest(){
-        setUser(null)
+        // setUser(null)
         navigate('/games')
     }
 
@@ -62,7 +61,7 @@ function Home() {
                     <input type="text" name="username" onChange={handleChange} value={userInfo.username}/>
                 </div>
                 <label for="password" >Enter your password:</label>
-                <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
+                <input className='password-input' type="password" name="password" onChange={handleChange} value={userInfo.password}/>
                 <input type="submit"/>
             </form>
            
@@ -74,9 +73,6 @@ function Home() {
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
 
         </div>
-        
-
-
     )
 }
 
