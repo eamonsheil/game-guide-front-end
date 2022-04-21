@@ -129,12 +129,16 @@ input {
   border-radius: 8px;
 }
 
-.game-list-item button, .saved-game-item button {
+.game-list-item button, .emoji-btn, .saved-game-item button, .key-spot button {
   background-color:#189084;
   border-radius: 3em;
 }
 
-.game-list-item button:hover, .saved-game-item button:hover  {
+.emoji-btn {
+  float: left;
+}
+
+.game-list-item button:hover, .emoji-btn:hover, .saved-game-item button:hover  {
   background-color:#24c2b2;
 }
 
@@ -195,9 +199,20 @@ h1 {
 .key-spot{
   display: flex;
   border: white 2px solid;
+  width: fit-content;
   border-radius: 10px;
-  background-color: #189084;
+  background-color: #2e8a81b2;
   /* background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Key_Vector_Graphic.svg/1000px-Key_Vector_Graphic.svg.png"); */
+}
+.key-spot button{
+  height: 2em;
+  color: white;
+}
+.key-spot button:hover{
+  height: 2em;
+  color: white;
+  background-color: #92a2a0b2;
+  transform: scale(.9);
 }
 ul {
   list-style: none;

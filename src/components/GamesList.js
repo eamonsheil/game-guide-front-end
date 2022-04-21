@@ -16,6 +16,8 @@ const defaultObj = {
 function GamesList() {
     const [user, setUser] = useContext(UserContext)
 
+    const [showKey, setShowKey] = useState(false)
+
     const [games, setGames] = useState([])
     const [show, setShow] = useState([false])
     const [showGameForm, setShowGameForm] = useState(false)
@@ -78,6 +80,7 @@ function GamesList() {
     function toggleGameForm(game){
         setShowGameForm(!showGameForm)
         setCurrentGame(game)
+        // document.scrollTo(options.top)
     }
 
     function toggleGameDetail(game) {
@@ -122,6 +125,23 @@ function GamesList() {
 
         }
     }
+    const emojiKey = 
+        <div className='key-spot'>
+        <button onClick={()=>setShowKey(false)}>X</button>
+        <ul>
+            <strong>highlights key:  </strong>
+            <li>🎲 - dice rolling</li>
+            <li>🃏 - card game</li> 
+            <li>🎉 - party game</li> 
+            <li>👀 - card game</li> 
+        </ul>
+        <ul>
+            <strong>your games key: </strong>
+            <li>🎮 - played</li> 
+            <li>👍 - liked</li> 
+            <li>💸 - bought</li> 
+        </ul>
+    </div>
 
     return (
         <>
@@ -157,23 +177,10 @@ function GamesList() {
             </div>
             </form>
 
-            <div className='key-spot'>
-                <ul>
-                    <strong>highlights key:  </strong>
-                    <li>🎲 - dice rolling</li>
-                    <li>🃏 - card game</li> 
-                    <li>🎉 - party game</li> 
-                    <li>👀 - card game</li> 
-                </ul>
-                <ul>
-                    <strong>your games key: </strong>
-                    <li>🎮 - played</li> 
-                    <li>👍 - liked</li> 
-                    <li>💸 - bought</li> 
-                </ul>
-            </div>
 
-            
+
+            {showKey ? emojiKey : <button className='emoji-btn' onClick={()=> setShowKey(true)}>emoji explainer</button>}
+            <br/>
             {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
             {showDetail ? <GameDetail detailID={currentGame.id}/> : null}
