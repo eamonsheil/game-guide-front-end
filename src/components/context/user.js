@@ -12,6 +12,7 @@ import {createContext, useState} from 'react'
                 picture_src: "https://cdn.mos.cms.futurecdn.net/C9JVYkqCELkdERaqd9gFbj.jpg",
                 alt_text: "a beauteus gent"
             }
+
         })
 
         return <UserContext.Provider value={[currentUser, setCurrentUser]}>{children}</UserContext.Provider>
