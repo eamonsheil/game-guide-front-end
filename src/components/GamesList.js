@@ -128,7 +128,7 @@ function GamesList() {
             
             {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
-            {showDetail ? <GameDetail currentGame={currentGame}/> : null}
+            {showDetail ? <GameDetail currentID={currentGame.id}/> : null}
 
              <ul className='game-list'> {showGames} </ul>
         

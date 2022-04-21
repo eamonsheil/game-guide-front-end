@@ -29,10 +29,7 @@ function UserPage() {
                 <div className='game-list-item'>
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
-                    <p>{game.description}</p>
-                    {/* short description? */}
-                    {/* {ReactHtmlParser(game.description)} */}
-                {/* <button onClick={() => toggleGameDetail(game)}>View Details</button> */}
+                <button onClick={() => toggleGameDetail(game)}>View Details</button>
                 <button>remove from your list</button>
                 </div>
             )
@@ -59,9 +56,9 @@ function UserPage() {
             {/* {gameDisplay} */}
 
             <ul className='game-list'>
-                {gameDisplay}
-                {/* {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} */}
-                {/* {showDetail ? <GameDetail currentGame={currentGame}/> : gameDisplay} */}
+                {/* {gameDisplay} */}
+                {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
+                {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
             </ul>
         </div>
                 

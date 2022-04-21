@@ -1,7 +1,17 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
-function GameDetail({currentGame}) {
+function GameDetail({detailID}) {
 
+    const [currentGame, setCurrentGame] = useState({})
+
+    //TODO: take in game ID instead of game obj, the fetch current game and set as obj to use
+    //then make a fetch call w. comments and similar games
+
+    useEffect(() => {
+        fetch(`http://localhost:9292/games/${detailID}`)
+        .then(resp => resp.json())
+        .then(data => setCurrentGame(data))
+    }, [])
 
     const showDescription = {__html: currentGame.description}
     console.log("currentGame", currentGame, "relationships", currentGame.game_relationships)
