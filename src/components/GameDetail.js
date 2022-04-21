@@ -37,12 +37,12 @@ function GameDetail({detailID}) {
     function getPrettyComments(){
         const comments = currentGame.game_relationships.map(relationship => {
             return (
-            <div key={uuid}>
-            <img src={relationship.user.profile_pic.picture_src} 
+            <div className="comment-box" key={uuid}>
+            <img className='comment-img' src={relationship.user.profile_pic.picture_src} 
             alt={relationship.user.profile_pic.alt_text}
             height="50"
             />
-            <p><strong>{relationship.user.username} </strong> {relationship.comment + " - "} </p>
+            <p className='comment-content'><strong>{relationship.user.username} </strong> {relationship.comment + " - "} </p>
             </div>
             )
         })
@@ -59,9 +59,9 @@ function GameDetail({detailID}) {
 
 
     return(
-        <div id='game-detail'>
+        <div className='game-detail'>
 
-                <img id="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
+                <img className="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
 
                 
                 <div className="game-detail-info">
@@ -71,11 +71,12 @@ function GameDetail({detailID}) {
                     <p><strong>Rating: </strong>{Math.floor(currentGame.rating)} / 10</p>
                     <p><strong>Play time:</strong> {currentGame.min_play_time} - {currentGame.max_play_time} minutes</p>
                     <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
-                    <div dangerouslySetInnerHTML={showDescription}/>
+                    <p><strong>Game Description:</strong></p>
+                    <div className="detail-description" dangerouslySetInnerHTML={showDescription}/>
                     
                 </div>
+                <strong>User Comments:</strong>
                 <div className="comments">
-                    <strong>User Comments:</strong>
                     <div>
                     {getPrettyComments()}
                     </div>

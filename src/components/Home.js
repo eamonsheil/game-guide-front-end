@@ -51,7 +51,7 @@ function Home() {
 
     return (
         <div className='login'>
-            <h1>Homepage</h1>
+            <h1>Game Guide</h1>
 
             <form type="submit" onSubmit={handleSubmit}>
                 <div>
@@ -60,6 +60,7 @@ function Home() {
                 </div>
                 <label >Enter your password:</label>
                 <input type="text" name="password" onChange={handleChange} value={userInfo.password}/>
+                <div></div>
                 <input type="submit"/>
             </form>
 

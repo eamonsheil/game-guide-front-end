@@ -148,6 +148,8 @@ function GamesList() {
             {showDetail ? <GameDetail detailID={currentGame.id}/> : null}
 
             <ul className='game-list'> {showGames} </ul>
+
+            {/* {showDetail ? null : <ul className='game-list'> {showGames} </ul>} */}
         
         </>
     )

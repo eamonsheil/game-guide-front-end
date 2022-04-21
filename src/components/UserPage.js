@@ -39,19 +39,18 @@ function UserPage() {
 
     if(user.game_relationships){
         const gamesToShow = userGames.map(game => {
-            // const game = (relationship.game)
             return(
-                <div className='game-list-item'>
-                    <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
+                <li className='saved-game-item'>
+                    <img className="saved-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
                 <button onClick={() => removeFromGames(game)}>remove from your list</button>
-                </div>
+                </li>
             )
         })
 
         gameDisplay = <div>
-            <h4>Your Saved Games</h4>
+            <h3>Your Saved Games</h3>
             {gamesToShow}
         </div>
     }
@@ -66,11 +65,10 @@ function UserPage() {
     return (
         <div className="user-page">
             <Header location="UserPage"/>
-            <h2>User Page....</h2>
-            <p>User: {user.username }</p>
+            <h2> User Page: </h2>
             {/* {gameDisplay} */}
 
-            <ul className='game-list'>
+            <ul className='saved-game-list'>
                 {/* {gameDisplay} */}
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
                 {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
