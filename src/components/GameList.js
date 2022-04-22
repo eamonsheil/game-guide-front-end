@@ -36,11 +36,11 @@ function GameList({games}) {
         if(user){game.game_relationships.forEach(relationship => {
             if(relationship.user_id === user.id){
                 isOwnedDiv = <div>
-                    <p>In your games!</p>
-                    {relationship.played ? <>🎮</> : null}
-                    {relationship.liked ? <>👍</> : null}
-                    {relationship.owned ? <>💸</> : null}
-                    </div>
+                                <p>In your games!</p>
+                                {relationship.played ? <>🎮</> : null}
+                                {relationship.liked ? <>👍</> : null}
+                                {relationship.owned ? <>💸</> : null}
+                             </div>
             }
         })}
         return(

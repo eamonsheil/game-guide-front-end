@@ -49,7 +49,7 @@ function GameDetail({detailID}) {
 
     const showDescription = {__html: currentGame.description}
 
-    function getPrettyComments(){
+    function getPrettyComments() {
         const comments = currentGame.game_relationships.map(relationship => {
             return (
             <div className="comment-box" key={uuid}>
@@ -65,7 +65,7 @@ function GameDetail({detailID}) {
     }
 
     let currentGameOwned = false
-    if(user){
+    if(user)  {
         // console.log(currentGame.game_relationships)
         currentGame.game_relationships.forEach(relationship => {
         if(relationship.user_id === user.id){

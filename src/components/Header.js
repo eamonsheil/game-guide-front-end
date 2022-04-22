@@ -28,7 +28,6 @@ function Header({location}){
         <header className="header">
 
             <h3 className="welcome-user"> Welcome {user ? `back, ${user.username}!` : "to Game Guide"}</h3>
-            {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
             {user ? <button onClick={handleLogOut}>log out</button> : <button onClick={handleLogIn}>log in</button>}
             {user ? <button onClick={()=> navigate("/userpage")}>view your games</button> : null}
             <button onClick={()=> navigate("/games")}>view full games list</button>

@@ -63,12 +63,12 @@ function AddToGamesForm({currentGame}) {
                     <input  onChange={handleCheckChange}  type="checkbox" name="played"></input>
                     <br/>
                     <label >If yes, for how many total hours?</label>
-                    <input  onChange={handleFormChange} type="number" name="hours_played"></input>
+                    <input  className='num-input' onChange={handleFormChange} type="number" name="hours_played"></input>
                     <br/>
                     <label >Did you like it?</label>
                     <input  onChange={handleCheckChange} type="checkbox" name="liked"></input>
                     <br/>
-                    <input  onChange={handleFormChange} type="text" name="comment" placeholder="Any comments to add?"></input>
+                    <input  className='text-input' onChange={handleFormChange} type="text" name="comment" placeholder="Any comments to add?"></input>
 
                     <input type="submit"/>
             </form>

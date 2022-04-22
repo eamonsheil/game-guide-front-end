@@ -40,25 +40,25 @@ function NewUserForm({setIsNewUser, isNewUser}){
         }
         
         else {
-            
-        fetch(`http://localhost:9292/users`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            },
-            body: JSON.stringify({
-                password: newUserInfo.password,
-                username: newUserInfo.username,
-                profile_pic_id: newUserInfo.profile_pic
+            fetch(`http://localhost:9292/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                    password: newUserInfo.password,
+                    username: newUserInfo.username,
+                    profile_pic_id: newUserInfo.profile_pic
+                })
             })
-        })
-        .then( res => res.json())
-        .then( data => {
-            setUser(data)
-            navigate('/games')
-        })
-        .catch( error => console.log(error.message));
+            .then( res => res.json())
+            .then( data => {
+                console.log(data)
+                setUser(data)
+                navigate('/games')
+            })
+            .catch( error => console.log(error.message));
 
     }}
 
@@ -69,10 +69,10 @@ function NewUserForm({setIsNewUser, isNewUser}){
             <h4>New user? Create an account here</h4>
         <form onSubmit={handleSubmit}>
             <label>Name: </label>
-                <input name="username" onChange={handleFormChange} type="text" />
+                <input className='text-input' name="username" onChange={handleFormChange} type="text" />
                 <br/>
             <label>Password:</label>
-                <input name="password" onChange={handleFormChange} type="password" />
+                <input className='text-input' name="password" onChange={handleFormChange} type="password" />
               
                 
                 

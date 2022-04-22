@@ -61,6 +61,7 @@ function UserPage() {
     return (
         <div className="user-page">
             <Header location="UserPage"/>
+            {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
             <h2> Your Saved Gmes: </h2>
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
