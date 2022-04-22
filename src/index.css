@@ -81,13 +81,18 @@ button {
   margin-right: 1em;
 }
 
-.login-button .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
+.login-button, .login button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
   font-size: 1em;
   color:#3dafa4;
   opacity: 1;
+}
+
+.login-button, .login button {
+  background-color: rgba(39, 84, 167, 0.4) ;
+  color: black
 }
 
 .account-setting-button {
