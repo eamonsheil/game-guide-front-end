@@ -2,7 +2,7 @@ import {useState, useContext} from 'react'
 import {UserContext} from "./context/user"
 
 
-function AddToGamesForm({currentGame}) {
+function AddToGamesForm({currentGame, setShowGameForm}) {
     const [user, setUser] = useContext(UserContext)
 
     const [formData, setFormData] = useState({
@@ -48,7 +48,12 @@ function AddToGamesForm({currentGame}) {
             })
         })
         .then( res => res.json())
-        .then( data => console.log(data))
+        .then( data => {
+            e.target.reset()
+            setShowGameForm(false)
+            console.log(currentGame)
+            alert(`${currentGame.title} added to your game list!`)
+        })
         .catch( error => console.log(error.message));
     }
 
@@ -61,16 +66,16 @@ function AddToGamesForm({currentGame}) {
                     <br/>
                     <label >Have you played it?</label>
                     <input  onChange={handleCheckChange}  type="checkbox" name="played"></input>
-                    <br/>
-                    <label >If yes, for how many total hours?</label>
-                    <input  onChange={handleFormChange} type="number" name="hours_played"></input>
+                    {/* <br/> */}
+                    {/* <label >If yes, for how many total hours?</label>
+                    <input  onChange={handleFormChange} type="number" name="hours_played"></input> */}
                     <br/>
                     <label >Did you like it?</label>
                     <input  onChange={handleCheckChange} type="checkbox" name="liked"></input>
                     <br/>
                     <input  onChange={handleFormChange} type="text" name="comment" placeholder="Any comments to add?"></input>
-
-                    <input type="submit"/>
+                    <br/>
+                    <input className="add-game-form-submit" type="submit"/>
             </form>
         </div>
     )

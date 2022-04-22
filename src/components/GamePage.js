@@ -1,11 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
-import GameDetail from './GameDetail'
 import GameList from './GameList'
 import Header from './Header'
-// import AddToGamesForm from './AddToGamesForm'
 import {UserContext} from "./context/user"
-// import Modal from 'react-modal';
-// import ReactHtmlParser from 'react-html-parser'
 
 const defaultObj = {
     search:  "",
@@ -13,20 +9,16 @@ const defaultObj = {
     playtime: 0
 }
 
-function GamesList() {
+function GamePage() {
     const [user, setUser] = useContext(UserContext)
 
-    const [showKey, setShowKey] = useState(false)
 
     const [games, setGames] = useState([])
     const [filteredGames, setFilteredGames] = useState([])
     const [show, setShow] = useState([false])
-    // const [showGameForm, setShowGameForm] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [formData, setFormData] = useState(defaultObj)
-    // const [showDetail, setShowDetail] = useState(false)
-    // const [currentGame, setCurrentGame] = useState({})
 
     useEffect(() => {
         getAllGames()
@@ -38,55 +30,6 @@ function GamesList() {
         .then( data => setGames(data))
     }
 
-    // const showGames = games.map((game) => {
-    //     let isOwnedDiv
-    //     if(user){game.game_relationships.forEach(relationship => {
-    //         if(relationship.user_id === user.id){
-    //             isOwnedDiv = <div>
-    //                 <p>In your games!</p>
-    //                 {relationship.played ? <>🎮</> : null}
-    //                 {relationship.liked ? <>👍</> : null}
-    //                 {relationship.owned ? <>💸</> : null}
-    //                 </div>
-
-    //         }
-    //     })}
-    //     // console.log(game.game_relationships)
-    //     // const description = document.createElement("div")
-    //     return(
-
-    //         <li className='game-list-item' key={game.id}>
-    //                 <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
-    //                 <p>Title: <strong>{game.title}</strong></p>
-                    
-    //                 <div>
-    //                     <p>highlights:</p>
-    //                     {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
-    //                     {game.categories.includes("card_game") ? <>🃏</> : null}
-    //                     {game.categories.includes("cooperative") ? <>🤝</> : null}
-    //                     {game.categories.includes("party_game") ? <>🎉</> : null}
-    //                     {game.mechanics.includes("bluffing") ? <>👀 </> : null}
-
-    //                 </div>
-    //                 {isOwnedDiv}
-    //                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
-    //                 {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(game)}>Add to My Games</button> : null}
-    //                 {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null}
-
-    //         </li>
-    //     )
-    // })
-
-    // function toggleGameForm(game){
-    //     setShowGameForm(!showGameForm)
-    //     setCurrentGame(game)
-    //     // document.scrollTo(options.top)
-    // }
-
-    // function toggleGameDetail(game) {
-    //     setShowDetail(!showDetail)
-    //     setCurrentGame(game)
-    // }
 
     function handleFormChange(event){
         setFormData({
@@ -94,7 +37,6 @@ function GamesList() {
             [event.target.name] : event.target.value
         })
         if (!formData.search){
-        // console.log(formData)
             getAllGames()}
     }
     function handleCategoryChange(e) {
@@ -126,23 +68,7 @@ function GamesList() {
             }
         setFormData(defaultObj)
     }
-    const emojiKey = 
-        <div className='key-spot'>
-        <button onClick={()=>setShowKey(false)}>X</button>
-        <ul>
-            <strong>highlights key:  </strong>
-            <li>🎲 - dice rolling</li>
-            <li>🃏 - card game</li> 
-            <li>🎉 - party game</li> 
-            <li>👀 - card game</li> 
-        </ul>
-        <ul>
-            <strong>your games key: </strong>
-            <li>🎮 - played</li> 
-            <li>👍 - liked</li> 
-            <li>💸 - bought</li> 
-        </ul>
-    </div>
+
 
     return (
         <>
@@ -185,26 +111,18 @@ function GamesList() {
                 <option value="party_game">Party Game</option>
             </select>
             
-
-
-            {showKey ? emojiKey : <button className='emoji-btn' onClick={()=> setShowKey(true)}>emoji explainer</button>}
+            {/* {showKey ? emojiKey : <button className='emoji-btn' onClick={()=> setShowKey(true)}>Emoji Explainer</button>} */}
             <br/>
-            {/* {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
-        
-            {showDetail ? <GameDetail detailID={currentGame.id}/> : null} */}
 
-            {/* <ul className='game-list'> {showGames} </ul> */}
             <ul className='game-list'>
                 <GameList games={games} />
             </ul>
-
-            {/* {showDetail ? null : <ul className='game-list'> {showGames} </ul>} */}
         
         </>
     )
 }
 
-export default GamesList;
+export default GamePage;
 
 
     {/* <button onClick={handleModal}id="myBtn">Open Modal</button> */}

@@ -13,31 +13,17 @@ function UserPage() {
     const [showDetail, setShowDetail] = useState(false)
     const [currentGame, setCurrentGame] = useState(null)
     const [userGames, setUserGames] = useState([])
+    const counter = 0
+    function increaseCounter(){
+        counter++
+    }
+
 
     useEffect(() => {
-        // console.log(user.id)
         fetch(`http://localhost:9292/user_games/${user.id}`)
         .then(resp => resp.json())
         .then(data => setUserGames(data))
-    }, [])
-
-    // function toggleGameDetail(game) {
-    //     setShowDetail(!showDetail)
-    //     setCurrentGame(game)
-    // }
-
-
-    // function removeFromGames(game, event){
-    //     fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
-    //         method: "DELETE"
-    //     })
-    //     .then( res => res.json())
-    //     .then( data => {
-    //         // console.log(data)
-    //         // event.target.parent.remove()
-    //     })
-    //     .catch( error => console.log(error.message));
-    // }
+    }, [increaseCounter])
 
     if(!user){navigate('/games')}
     let gameDisplay
@@ -47,7 +33,7 @@ function UserPage() {
 
         gameDisplay = <>
             {/* <h3>Your Saved Games:</h3> */}
-            <GameList games={userGames}/>
+            <GameList increaseCounter={increaseCounter} games={userGames}/>
         </>
     }
     else{
@@ -61,10 +47,10 @@ function UserPage() {
     return (
         <div className="user-page">
             <Header location="UserPage"/>
-            <h2> Your Saved Gmes: </h2>
+            <h2> Your Saved Games: </h2>
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
-                {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
+                {showDetail ? <GameDetail detailID={currentGame.id} /> : gameDisplay}
             </ul>
         </div>
                 
