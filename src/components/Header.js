@@ -18,7 +18,7 @@ function Header({location}){
 
     function handleLogOut(){
         setUser(null)
-        // navigate("/")
+        navigate("/")
     }
 
     function handleLogIn(){
@@ -28,8 +28,8 @@ function Header({location}){
         <header className="header">
 
             <h3 className="welcome-user"> Welcome {user ? `back, ${user.username}!` : "to Game Guide"}</h3>
-            <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img>
-            {user.username !== "bob" ? <button onClick={handleLogOut}>log out</button> : <button onClick={handleLogIn}>log in</button>}
+            {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
+            {user ? <button onClick={handleLogOut}>log out</button> : <button onClick={handleLogIn}>log in</button>}
             {user ? <button onClick={()=> navigate("/userpage")}>view user page</button> : null}
             <button onClick={()=> navigate("/games")}>view games list</button>
             {/* user avatar, log in or view page */}

@@ -1,8 +1,21 @@
-import {useEffect, useState} from 'react';
+import { useState, useEffect, useContext } from 'react'
+import {UserContext} from "./context/user"
+import AddToGamesForm from './AddToGamesForm'
 import { v4 as uuid } from "uuid";
+import GameList from './GameList';
 
 
 function GameDetail({detailID}) {
+
+    const [user, setUser] = useContext(UserContext)
+    
+    const [showGameForm, setShowGameForm] = useState(false)
+    function toggleGameForm(game){
+        setShowGameForm(!showGameForm)
+        setCurrentGame(game)
+        // document.scrollTo(options.top)
+    }
+
 
     const [currentGame, setCurrentGame] = useState({
         title: "Azul",
@@ -50,20 +63,12 @@ function GameDetail({detailID}) {
     
     }
 
-    const prettySimilarGames = similarGames.map(game => {
-        return <div className='similar-game' key={uuid}>
-            <img className="similar-game-detail-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
-            <p><strong>Title: </strong>{game.title}</p>
-        </div>
-    })
-
 
     return(
         <div className='game-detail'>
 
                 <img className="game-detail-img" src={currentGame.image_url} alt={currentGame.title} height="200px" width="auto"/>
 
-                
                 <div className="game-detail-info">
                     <p><strong>Title: </strong>{currentGame.title}</p>
                     <p><strong>Categories:</strong> {currentGame.categories.split("_").join(" ")}</p>
@@ -81,10 +86,12 @@ function GameDetail({detailID}) {
                     {getPrettyComments()}
                     </div>
                 </div>
-                <p>{prettySimilarGames.length > 0 ? "Check out some similar games!" : "this game is unique"}</p>
-                <div className='similar-game-bin'>
-                    {prettySimilarGames}
+                <p>{similarGames.length > 0 ? "Check out some similar games!" : "this game is unique"}</p>
+                <div className='game-list'>
+                    <GameList games={similarGames}/>
                 </div>
+                {/* {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(currentGame)}>Add to My Games</button> : null}
+                    {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null} */}
             </div>
 
     )

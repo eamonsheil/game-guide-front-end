@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react'
 import GameDetail from './GameDetail'
+import GameList from './GameList'
 import Header from './Header'
-import AddToGamesForm from './AddToGamesForm'
+// import AddToGamesForm from './AddToGamesForm'
 import {UserContext} from "./context/user"
 // import Modal from 'react-modal';
 // import ReactHtmlParser from 'react-html-parser'
@@ -20,12 +21,12 @@ function GamesList() {
     const [games, setGames] = useState([])
     const [filteredGames, setFilteredGames] = useState([])
     const [show, setShow] = useState([false])
-    const [showGameForm, setShowGameForm] = useState(false)
+    // const [showGameForm, setShowGameForm] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [formData, setFormData] = useState(defaultObj)
-    const [showDetail, setShowDetail] = useState(false)
-    const [currentGame, setCurrentGame] = useState({})
+    // const [showDetail, setShowDetail] = useState(false)
+    // const [currentGame, setCurrentGame] = useState({})
 
     useEffect(() => {
         getAllGames()
@@ -37,57 +38,55 @@ function GamesList() {
         .then( data => setGames(data))
     }
 
-    const showGames = games.map((game) => {
-        let isOwnedDiv
-        if(user){game.game_relationships.forEach(relationship => {
-            if(relationship.user_id === user.id){
-                isOwnedDiv = <div>
-                    <p>In your games!</p>
-                    {relationship.played ? <>🎮</> : null}
-                    {relationship.liked ? <>👍</> : null}
-                    {relationship.owned ? <>💸</> : null}
-                    </div>
+    // const showGames = games.map((game) => {
+    //     let isOwnedDiv
+    //     if(user){game.game_relationships.forEach(relationship => {
+    //         if(relationship.user_id === user.id){
+    //             isOwnedDiv = <div>
+    //                 <p>In your games!</p>
+    //                 {relationship.played ? <>🎮</> : null}
+    //                 {relationship.liked ? <>👍</> : null}
+    //                 {relationship.owned ? <>💸</> : null}
+    //                 </div>
 
-            }
-        })}
-        // console.log(game.game_relationships)
-        // const description = document.createElement("div")
-        return(
+    //         }
+    //     })}
+    //     // console.log(game.game_relationships)
+    //     // const description = document.createElement("div")
+    //     return(
 
-            <li className='game-list-item' key={game.id}>
-                    <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
-                    <p>Title: <strong>{game.title}</strong></p>
+    //         <li className='game-list-item' key={game.id}>
+    //                 <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
+    //                 <p>Title: <strong>{game.title}</strong></p>
                     
-                    <div>
-                        <p>highlights:</p>
-                        {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
-                        {game.categories.includes("card_game") ? <>🃏</> : null}
-                        {game.categories.includes("cooperative") ? <>🤝</> : null}
-                        {game.categories.includes("party_game") ? <>🎉</> : null}
-                        {game.mechanics.includes("bluffing") ? <>👀 </> : null}
+    //                 <div>
+    //                     <p>highlights:</p>
+    //                     {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
+    //                     {game.categories.includes("card_game") ? <>🃏</> : null}
+    //                     {game.categories.includes("cooperative") ? <>🤝</> : null}
+    //                     {game.categories.includes("party_game") ? <>🎉</> : null}
+    //                     {game.mechanics.includes("bluffing") ? <>👀 </> : null}
 
-                    </div>
-                    {isOwnedDiv}
-                    <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                    {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(game)}>Add to My Games</button> : null}
-                    {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null}
+    //                 </div>
+    //                 {isOwnedDiv}
+    //                 <button onClick={() => toggleGameDetail(game)}>View Details</button>
+    //                 {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(game)}>Add to My Games</button> : null}
+    //                 {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null}
 
-            </li>
-        )
-    })
+    //         </li>
+    //     )
+    // })
 
-    function toggleGameForm(game){
-        setShowGameForm(!showGameForm)
-        setCurrentGame(game)
-        // document.scrollTo(options.top)
-    }
+    // function toggleGameForm(game){
+    //     setShowGameForm(!showGameForm)
+    //     setCurrentGame(game)
+    //     // document.scrollTo(options.top)
+    // }
 
-    function toggleGameDetail(game) {
-        //console.log(currentGame, showDetail)
-        // console.log(game)
-        setShowDetail(!showDetail)
-        setCurrentGame(game)
-    }
+    // function toggleGameDetail(game) {
+    //     setShowDetail(!showDetail)
+    //     setCurrentGame(game)
+    // }
 
     function handleFormChange(event){
         setFormData({
@@ -188,14 +187,16 @@ function GamesList() {
             
 
 
-
             {showKey ? emojiKey : <button className='emoji-btn' onClick={()=> setShowKey(true)}>emoji explainer</button>}
             <br/>
-            {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
+            {/* {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
-            {showDetail ? <GameDetail detailID={currentGame.id}/> : null}
+            {showDetail ? <GameDetail detailID={currentGame.id}/> : null} */}
 
-            <ul className='game-list'> {showGames} </ul>
+            {/* <ul className='game-list'> {showGames} </ul> */}
+            <ul className='game-list'>
+                <GameList games={games} />
+            </ul>
 
             {/* {showDetail ? null : <ul className='game-list'> {showGames} </ul>} */}
         

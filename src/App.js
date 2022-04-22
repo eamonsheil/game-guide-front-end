@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
-import GamesList from './components/GamesList';
+import GamePage from './components/GamePage';
 import UserPage from './components/UserPage';
 import React from "react";
 import {UserProvider} from "./components/context/user"
@@ -13,7 +13,7 @@ function App() {
       <UserProvider>
         <Routes>
           <Route path="/" element={ <Home/>} />
-          <Route path="games" element={ <GamesList/> } />
+          <Route path="games" element={ <GamePage/> } />
           <Route path="userpage" element={ <UserPage/> } />
         </Routes>
       </UserProvider>

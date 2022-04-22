@@ -44,7 +44,7 @@ function Home() {
     }
 
     function beGuest(){
-        // setUser(null)
+        setUser(null)
         navigate('/games')
     }
 
