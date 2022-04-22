@@ -7,7 +7,6 @@ import GameList from "./GameList"
 
 
 function UserPage() {
-    const [accountSettingsForm, setAccountSettingsForm] = useState({})
     const [showAccountForm, setShowAccountForm] = useState(false)
     const [user] = useContext(UserContext)
     const navigate = useNavigate()
@@ -20,6 +19,15 @@ function UserPage() {
     function increaseCounter(){
         counter++
     }
+
+    const currentUserObj = {
+        username: user.username,
+        password: user.password,
+        profile_pic_id: user.profile_pic_id
+    }
+
+    const [accountSettingsForm, setAccountSettingsForm] = useState(currentUserObj)
+
 
     useEffect(() => {
         fetch(`http://localhost:9292/profile_pics`)
@@ -35,9 +43,8 @@ function UserPage() {
     }
 
     function handleOptionChange(e) {
-        console.log(e.target.value)
             setAccountSettingsForm({
-                ...accountForm, profile_pic: e.target.value
+                ...accountSettingsForm, profile_pic_id: e.target.value
             })
     }
 
@@ -67,33 +74,58 @@ function UserPage() {
         </div>
     }
 
-    const accountForm = <div>FORM</div>
-    // const accountForm = <div className="account-form">
-    //     <button onClick={()=>setShowAccountForm(false)}>X</button>
-    //     <form>
-    //         <input type="submit"/>
-    //         <label><strong>Username: </strong></label>
-    //         <input 
-    //             name="username" 
-    //             onChange={handleAccountSettingsForm} 
-    //             type="text"
-    //             placeholder={user.username}
-    //         />
-    //         <label><strong>Password</strong></label>
-    //         <input name="password" onChange={handleAccountSettingsForm} type="test" />
-    //         <label>Profile Picture</label>
-    //         <div className='avatar-select' >
-    //                 {profilePics.map((pic) => 
-    //                     (
-    //                         <label for="profile_pic">
-    //                             <img id={pic.id} src={pic.picture_src} alt={pic.alt_text} style={{height: 50}}/>
-    //                             <input id={pic.id} type="radio" name="profile_pic" value={pic.id} onChange={handleOptionChange}/>
-    //                         </label>
-    //                     )
-    //                 )}
-    //             </div>
-    //     </form>
-    // </div>
+    function handleSubmit(event){
+        event.preventDefault()
+
+        fetch(`http://localhost:9292/users/${user.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(accountSettingsForm)
+        })
+        .then( res => res.json())
+        .then( data => alert("account settings updated!"))
+        .catch( error => console.log(error.message));
+    }
+
+    // const accountForm = <div>FORM</div>
+    const accountForm = <div className="account-form">
+        <button onClick={()=>setShowAccountForm(false)}>X</button>
+        <form onSubmit={handleSubmit}>
+            <label><strong>Username: </strong></label>
+            <input 
+                name="username" 
+                onChange={handleAccountSettingsForm} 
+                type="text"
+                placeholder={user.username}
+                className="text-input"
+            />
+            <br/>
+            <label><strong>Password: </strong></label>
+            <input 
+                name="password" 
+                onChange={handleAccountSettingsForm} 
+                placeholder={user.password}
+                className="text-input"
+                type="test" />
+                <br/>
+            <label> <strong> New Profile Picture: </strong></label>
+            <div className='avatar-select' >
+                    {profilePics.map((pic) => 
+                        (
+                            <label for="profile_pic">
+                                <img id={pic.id} src={pic.picture_src} alt={pic.alt_text} style={{height: 50}}/>
+                                <input id={pic.id} type="radio" name="profile_pic" value={pic.id} onChange={handleOptionChange}/>
+                            </label>
+                        )
+                    )}
+                </div>
+            <input className="account-form-submit" type="submit"/>
+
+        </form>
+    </div>
 
     return (
         <div className="user-page">
