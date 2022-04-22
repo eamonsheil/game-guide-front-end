@@ -62,7 +62,6 @@ function UserPage() {
         <div className="user-page">
             <Header location="UserPage"/>
             <h2> Your Saved Gmes: </h2>
-
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
                 {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
