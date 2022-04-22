@@ -1,4 +1,4 @@
-import {UserContext} from "./context/user"
+import {UserContext, userObject} from "./context/user"
 import{useNavigate} from 'react-router-dom'
 import {useContext, useEffect} from 'react'
 
@@ -17,8 +17,8 @@ function Header({location}){
     //     destinationButton = <button onClick={()=> navigate("/userpage")}>view user page</button> }
 
     function handleLogOut(){
-        setUser(null)
-        // navigate("/")
+        setUser(userObject)
+        navigate("/")
     }
 
     function handleLogIn(){

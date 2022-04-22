@@ -70,10 +70,9 @@ function UserPage() {
             <Header location="UserPage"/>
             <h2> User Page: </h2>
             {/* {gameDisplay} */}
-
+            {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
             <ul className='saved-game-list'>
                 {/* {gameDisplay} */}
-                {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
                 {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
             </ul>
         </div>
