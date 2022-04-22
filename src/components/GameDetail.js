@@ -45,7 +45,7 @@ function GameDetail({detailID}) {
         .then(resp => resp.json())
         .then(data => setSimilarGames(data))
         )
-    }, [])
+    }, [showGameForm])
 
     const showDescription = {__html: currentGame.description}
 
@@ -61,7 +61,7 @@ function GameDetail({detailID}) {
             </div>
             )
         })
-        return comments
+        return comments.reverse()
     }
 
     let currentGameOwned = false
@@ -86,7 +86,7 @@ function GameDetail({detailID}) {
                     <p><strong>Play time:</strong> {currentGame.min_play_time} - {currentGame.max_play_time} minutes</p>
                     <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
                     {user && !currentGameOwned ? <button className="form-button" onClick={() => toggleGameForm(currentGame)}>Add to Your Game List?</button> : null}
-                    {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null} 
+                    {showGameForm ? <AddToGamesForm setShowGameForm={setShowGameForm} currentGame={currentGame} /> : <p> <strong>This game is in your list! </strong></p>} 
 
                     <p><strong>Game Description:</strong></p>
                     <div className="detail-description" dangerouslySetInnerHTML={showDescription}/>
@@ -102,7 +102,7 @@ function GameDetail({detailID}) {
                 <div className='game-list'>
                     <GameList games={similarGames}/>
                 </div>
-            </div>
+        </div>
 
     )
 }

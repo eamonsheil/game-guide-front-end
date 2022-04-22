@@ -1,11 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
-import GameDetail from './GameDetail'
 import GameList from './GameList'
 import Header from './Header'
-// import AddToGamesForm from './AddToGamesForm'
 import {UserContext} from "./context/user"
-// import Modal from 'react-modal';
-// import ReactHtmlParser from 'react-html-parser'
 
 const defaultObj = {
     search:  "",
@@ -19,12 +15,9 @@ function GamePage() {
     const [games, setGames] = useState([])
     const [filteredGames, setFilteredGames] = useState([])
     const [show, setShow] = useState([false])
-    // const [showGameForm, setShowGameForm] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [formData, setFormData] = useState(defaultObj)
-    // const [showDetail, setShowDetail] = useState(false)
-    // const [currentGame, setCurrentGame] = useState({})
     useEffect(() => {
         getAllGames()
     },[])
@@ -84,23 +77,6 @@ function GamePage() {
             // }
         setFormData(defaultObj)
     }
-    const emojiKey = 
-        <div className='key-spot'>
-            <button onClick={()=>setShowKey(false)}>X</button>
-            <ul>
-                <strong>highlights key:  </strong>
-                <li>🎲 - dice rolling</li>
-                <li>🃏 - card game</li> 
-                <li>🎉 - party game</li> 
-                <li>👀 - card game</li> 
-            </ul>
-            <ul>
-                <strong>your games key: </strong>
-                <li>🎮 - played</li> 
-                <li>👍 - liked</li> 
-                <li>💸 - bought</li> 
-            </ul>
-        </div>
 
     return (
         <>

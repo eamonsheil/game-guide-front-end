@@ -25,6 +25,8 @@ button {
   background: rgba(34, 36, 135, 0.4) ;
   border: white 2px solid;
   border-radius: 10px;
+  width: 30em;
+  overflow: auto;
 }
 
 .game-detail-img{
@@ -50,6 +52,13 @@ button {
   text-align: left;
 }
 
+.add-game-form {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  position: relative;
+}
+
 .detail-description{
   height: 20em;
   overflow: auto;
@@ -67,7 +76,7 @@ button {
   margin-right: 1em;
 }
 
-.login button, .login-submit, .sassy-button, .form-button, .close-detail-button {
+.login button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
@@ -76,9 +85,19 @@ button {
   opacity: 1;
 }
 
+.close-detail-button{
+  height: fit-content;
+}
+
 .sassy-button{
   background-color: rgba(39, 84, 167, 0.7) ;
 }
+
+/* .game-list-item button {
+  /* position: absolute;
+  bottom: 2px;
+  height: 100%; */
+
 
 .login button:hover, .login-submit:hover, .sassy-button:hover, .form-button:hover, .close-detail-button:hover{
   background-color: #888;
@@ -96,13 +115,15 @@ button {
 
 }
 
-.detail-button {
-  position: 0;
-}
 
 .game-list-emojis {
   padding: 0em;
   margin: 0em;
+  position: inherit;
+}
+.game-list-emojis p {
+  padding: 0;
+  margin: 0;
 }
 
 .similar-game {
@@ -143,16 +164,21 @@ input {
   border-radius: 8px;
 }
 
-.game-list-item button, .emoji-btn, .saved-game-item button, .key-spot button {
+.game-list-item button, .account-setting-button, .emoji-btn, .saved-game-item button, .key-spot button {
   background-color:#189084;
   border-radius: 3em;
+  transition: all .5s ease-in-out; 
+}
+
+.account-setting-button:hover {
+  transform: scale(1.1);
 }
 
 .emoji-btn {
   float: left;
 }
 
-.game-list-item button:hover, .emoji-btn:hover, .saved-game-item button:hover  {
+.game-list-item button:hover, .account-setting-button:hover, .emoji-btn:hover, .saved-game-item button:hover  {
   background-color:#24c2b2;
 }
 
@@ -223,6 +249,9 @@ h1 {
   width: fit-content;
   border-radius: 10px;
   background-color: #2e8a81b2;
+  font-size: .6em;
+  margin-bottom: 5px;
+  margin-left: 5px;
   /* background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Key_Vector_Graphic.svg/1000px-Key_Vector_Graphic.svg.png"); */
 }
 .key-spot button{
