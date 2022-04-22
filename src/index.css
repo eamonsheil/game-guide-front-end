@@ -42,7 +42,7 @@ button {
   padding: 0px;
 }
 
-.comments, .add-game-form{
+.comments, .add-game-form, .account-form{
   overflow: auto;
   height: 10em;
   border: #0b5565 3px solid;
@@ -50,6 +50,10 @@ button {
   border-radius: 10px;
   background-color: #1595b2;
   text-align: left;
+}
+
+.account-form{
+  height: fit-content;
 }
 
 .add-game-form {
@@ -76,13 +80,24 @@ button {
   margin-right: 1em;
 }
 
-.login button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
+.login button, .account-setting-button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
   font-size: 1em;
   color:#3dafa4;
   opacity: 1;
+}
+
+.account-setting-button {
+  color:#0b5565;
+  font-size: 1em;
+  height: 4em;
+  margin-left: 60%;
+}
+
+.account-form button {
+  font-size: .5em;
 }
 
 .close-detail-button{
@@ -164,11 +179,13 @@ input {
   border-radius: 8px;
 }
 
+
 .user-page h2{
 display: inline-block;
 }
 
-.game-list-item button, .account-setting-button, .emoji-btn, .saved-game-item button, .key-spot button {
+.game-list-item button, .account-form button, .account-form-submit, .emoji-btn, .saved-game-item button, .key-spot button {
+
   background-color:#189084;
   border-radius: 3em;
   transition: all .5s ease-in-out; 
