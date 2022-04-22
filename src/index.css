@@ -40,7 +40,7 @@ button {
   padding: 0px;
 }
 
-.comments{
+.comments, .add-game-form{
   overflow: auto;
   height: 10em;
   border: #0b5565 3px solid;
@@ -67,7 +67,7 @@ button {
   margin-right: 1em;
 }
 
-.login button, .login-submit, .sassy-button, .form-button {
+.login button, .login-submit, .sassy-button, .form-button, .close-detail-button {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
@@ -80,7 +80,7 @@ button {
   background-color: rgba(39, 84, 167, 0.7) ;
 }
 
-.login button:hover, .login-submit:hover, .sassy-button:hover{
+.login button:hover, .login-submit:hover, .sassy-button:hover, .form-button:hover, .close-detail-button:hover{
   background-color: #888;
 }
 
@@ -94,6 +94,15 @@ button {
   border: 2px solid white;
   border-radius: 10px;
 
+}
+
+.detail-button {
+  position: 0;
+}
+
+.game-list-emojis {
+  padding: 0em;
+  margin: 0em;
 }
 
 .similar-game {

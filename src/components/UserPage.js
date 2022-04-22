@@ -46,7 +46,7 @@ function UserPage() {
 
 
         gameDisplay = <>
-            <h3>Your Saved Games:</h3>
+            {/* <h3>Your Saved Games:</h3> */}
             <GameList games={userGames}/>
         </>
     }
@@ -61,7 +61,7 @@ function UserPage() {
     return (
         <div className="user-page">
             <Header location="UserPage"/>
-            <h2> User Page: </h2>
+            <h2> Your Saved Gmes: </h2>
 
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 

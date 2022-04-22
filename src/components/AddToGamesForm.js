@@ -31,15 +31,6 @@ function AddToGamesForm({currentGame}) {
     function addToMyGames(e) {
         e.preventDefault()
         console.log(formData.game_id)
-        // const newRelationship = {
-        //     game_id: currentGame.id,
-        //     owned: formData.owned,
-        //     played: formData.played,
-        //     liked: formData.liked,
-        //     comment: formData.comment,
-        //     hours_played: formData.hours_played
-        // }
-        // console.log("added", newRelationship)
         fetch(`http://localhost:9292/game_relationships`, {
             method: "POST",
             headers: {
@@ -62,7 +53,7 @@ function AddToGamesForm({currentGame}) {
     }
 
     return (
-        <div>
+        <div className='add-game-form'>
             <form onSubmit={addToMyGames}>
                 
                     <label>Do you own this game?</label>

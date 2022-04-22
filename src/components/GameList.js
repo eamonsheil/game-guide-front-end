@@ -47,7 +47,7 @@ function GameList({games}) {
             <li className='game-list-item' key={game.id}>
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
-                    <div>
+                    <div className='game-list-emojis'>
                         <p>highlights:</p>
                         {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
                         {game.categories.includes("card_game") ? <>🃏</> : null}
@@ -56,7 +56,7 @@ function GameList({games}) {
                         {game.mechanics.includes("bluffing") ? <>👀 </> : null}
                     </div>
                     {isOwnedDiv}
-                    <button onClick={() => toggleGameDetail(game)}>View Details</button>
+                    <button className='detail-button' onClick={() => toggleGameDetail(game)}>View Details</button>
                     {location.pathname === '/userpage' ? <button onClick={(event) => removeFromGames(game,event)}>Remove from Your Games</button>:null}
             </li>
         )
@@ -64,7 +64,7 @@ function GameList({games}) {
 
     return (
         <>
-            {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
+            {showDetail ? <button className='close-detail-button' onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
             {showDetail ? <GameDetail detailID={currentGame.id}/> : showGames}
         </>
     )
