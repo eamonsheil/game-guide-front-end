@@ -15,7 +15,7 @@ function UserPage() {
     const [userGames, setUserGames] = useState([])
     const [profilePics, setProfilePics] = useState([])
 
-    const counter = 0
+    let counter = 0
     function increaseCounter(){
         counter++
     }
@@ -130,9 +130,12 @@ function UserPage() {
     return (
         <div className="user-page">
             <Header location="UserPage"/>
-            {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
-            {showAccountForm ? accountForm : <button onClick={()=> setShowAccountForm(true)} className="account-setting-button">Edit your account settings</button>}
+            
+            
             <h2> Your Saved Games: </h2>
+            {showAccountForm ? accountForm : <button onClick={()=> setShowAccountForm(true)} className="account-setting-button">Edit your account settings</button>}
+            {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
+            
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
                 {showDetail ? <GameDetail detailID={currentGame.id} /> : gameDisplay}

@@ -18,6 +18,7 @@ function GameList({games, increaseCounter}) {
     }
 
     function removeFromGames(game, event){
+        
         fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
             method: "DELETE"
         })
@@ -25,10 +26,11 @@ function GameList({games, increaseCounter}) {
         .then( data => {
             console.log(data)
             console.log(event.target)
+            increaseCounter()
             // event.target.parent.remove()
         })
         .catch( error => console.log(error.message));
-        increaseCounter()
+        
     }
 
 

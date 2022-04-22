@@ -73,7 +73,7 @@ function NewUserForm({setIsNewUser, isNewUser}){
                 <br/>
             <label>Password:</label>
                 <input className='text-input' name="password" onChange={handleFormChange} type="password" />
-                <h6>Choose a Profile Picture:</h6>
+                <h5>Choose a Profile Picture:</h5>
                 <div className='avatar-select' >
                     {profilePics.map((pic) => 
                         (

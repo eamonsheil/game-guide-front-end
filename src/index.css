@@ -179,10 +179,19 @@ input {
   border-radius: 8px;
 }
 
+
+.user-page h2{
+display: inline-block;
+}
+
 .game-list-item button, .account-form button, .account-form-submit, .emoji-btn, .saved-game-item button, .key-spot button {
+
   background-color:#189084;
   border-radius: 3em;
   transition: all .5s ease-in-out; 
+}
+.account-setting-button {
+  display: inline-block;
 }
 
 .account-setting-button:hover {
@@ -252,12 +261,16 @@ h1 {
 }
 
 .profile-picture {
-  height: 2em;
-  width: 2em;
-  display: block;
+  height: 5em;
+  width: 5em;
+  display: inline;
   border-radius: 50%;
-  margin-left: 5em;
+  margin: .5em 5em;
+  border: 1px solid #2e8a81b2;
+  background-color: #ffff;
 }
+
+
 .key-spot{
   display: flex;
   border: white 2px solid;
