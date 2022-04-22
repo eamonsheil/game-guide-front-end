@@ -14,18 +14,16 @@ const defaultObj = {
 
 function GamesList() {
     const [user, setUser] = useContext(UserContext)
-
     const [showKey, setShowKey] = useState(false)
-
     const [games, setGames] = useState([])
-    const [filteredGames, setFilteredGames] = useState([])
+    // const [filteredGames, setFilteredGames] = useState([])
     const [show, setShow] = useState([false])
     const [showGameForm, setShowGameForm] = useState(false)
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [formData, setFormData] = useState(defaultObj)
     const [showDetail, setShowDetail] = useState(false)
     const [currentGame, setCurrentGame] = useState({})
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         getAllGames()
@@ -52,12 +50,11 @@ function GamesList() {
         })}
         // console.log(game.game_relationships)
         // const description = document.createElement("div")
-        return(
+        return (
 
             <li className='game-list-item' key={game.id}>
                     <img className="games-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
                     <p>Title: <strong>{game.title}</strong></p>
-                    
                     <div>
                         <p>highlights:</p>
                         {game.mechanics.includes("dice_rolling") ? <>🎲</> : null}
@@ -65,18 +62,16 @@ function GamesList() {
                         {game.categories.includes("cooperative") ? <>🤝</> : null}
                         {game.categories.includes("party_game") ? <>🎉</> : null}
                         {game.mechanics.includes("bluffing") ? <>👀 </> : null}
-
                     </div>
                     {isOwnedDiv}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
                     {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(game)}>Add to My Games</button> : null}
                     {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null}
-
             </li>
         )
     })
 
-    function toggleGameForm(game){
+    function toggleGameForm(game) {
         setShowGameForm(!showGameForm)
         setCurrentGame(game)
         // document.scrollTo(options.top)
@@ -98,8 +93,8 @@ function GamesList() {
         // console.log(formData)
             getAllGames()}
     }
-    function handleCategoryChange(e) {
 
+    function handleCategoryChange(e) {
         const filteredGames = games.filter(game => (
             game.categories.includes(e.target.value)
         ))
@@ -127,55 +122,58 @@ function GamesList() {
             }
         setFormData(defaultObj)
     }
+
     const emojiKey = 
         <div className='key-spot'>
-        <button onClick={()=>setShowKey(false)}>X</button>
-        <ul>
-            <strong>highlights key:  </strong>
-            <li>🎲 - dice rolling</li>
-            <li>🃏 - card game</li> 
-            <li>🎉 - party game</li> 
-            <li>👀 - card game</li> 
-        </ul>
-        <ul>
-            <strong>your games key: </strong>
-            <li>🎮 - played</li> 
-            <li>👍 - liked</li> 
-            <li>💸 - bought</li> 
-        </ul>
-    </div>
+            <button onClick={()=>setShowKey(false)}>X</button>
+            <ul>
+                <strong>highlights key:  </strong>
+                <li>🎲 - dice rolling</li>
+                <li>🃏 - card game</li> 
+                <li>🎉 - party game</li> 
+                <li>👀 - card game</li> 
+            </ul>
+            <ul>
+                <strong>your games key: </strong>
+                <li>🎮 - played</li> 
+                <li>👍 - liked</li> 
+                <li>💸 - bought</li> 
+            </ul>
+        </div>
 
     return (
         <>
         <Header location="GameList" />
-        <form onSubmit={event => handleFormSubmit(event)}>
-            <input name="search" 
-            placeholder='Search by name....' 
-            value={formData.search} 
-            onChange={event => handleFormChange(event)}/>
-            <br/>
-            <label>Num players:
-                <input 
-                    onChange={event => handleFormChange(event)} 
-                    value={formData.numPlayers} 
-                    min="0"
-                    name="numPlayers" 
-                    type="number"/>
-            </label>
-            <label>Play time (in min):
-                <input 
-                    onChange={(event) => handleFormChange(event)} 
-                    value={formData.playtime} 
-                    placeholder=""
-                    min="0"
-                    name="playtime" 
-                    type="number"/>
-            </label>
-            <div>
-            <input className='game-list-submit' type="submit"></input>
+        <div className='search-form-container'>
+            <form className='search-form' onSubmit={event => handleFormSubmit(event)}>
+                <input id='search-input' name="search" 
+                type="text"
+                placeholder='Search by name....' 
+                value={formData.search} 
+                onChange={event => handleFormChange(event)}/>
+                <label>Num players:
+                    <input
+                        id='num-player-input' 
+                        onChange={event => handleFormChange(event)} 
+                        value={formData.numPlayers} 
+                        min="0"
+                        name="numPlayers" 
+                        type="number"/>
+                </label>
+                <label>Play time (in min):
+                    <input 
+                        onChange={(event) => handleFormChange(event)} 
+                        value={formData.playtime} 
+                        placeholder=""
+                        min="0"
+                        name="playtime" 
+                        type="number"/>
+                </label>
+                <div>
+                <input className='game-list-submit' type="submit"></input>
+                </div>
+                </form>
             </div>
-            </form>
-
             <label for="category">filter by category</label>
             <br/>
             <select name="category" onChange={(e) => handleCategoryChange(e)} >

@@ -4,7 +4,7 @@ import Home from './components/Home';
 import GamesList from './components/GamesList';
 import UserPage from './components/UserPage';
 import React from "react";
-import {UserProvider} from "./components/context/user"
+import { UserProvider } from "./components/context/user"
 
 
 function App() {

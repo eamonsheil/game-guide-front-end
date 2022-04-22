@@ -26,8 +26,9 @@ function NewUserForm({setIsNewUser, isNewUser}){
             [event.target.name] : event.target.value
         })
     }
+
     function handleOptionChange(e) {
-        console.log(e.target.value)
+            console.log(e.target.value)
             setNewUserInfo({
                 ...newUserInfo, profile_pic: e.target.value
             })
@@ -35,12 +36,12 @@ function NewUserForm({setIsNewUser, isNewUser}){
 
     function handleSubmit(e){
         e.preventDefault()
+        
         if (newUserInfo.password === "" || newUserInfo.username === "" || newUserInfo.profile_pic === ""){
             alert("You must have a username AND a password!")
         }
         
         else {
-            
         fetch(`http://localhost:9292/users`, {
             method: "POST",
             headers: {
@@ -62,33 +63,28 @@ function NewUserForm({setIsNewUser, isNewUser}){
 
     }}
 
-
-
     return (
         <div>
             <h4>New user? Create an account here</h4>
-        <form onSubmit={handleSubmit}>
-            <label>Name: </label>
-                <input name="username" onChange={handleFormChange} type="text" />
+            <form onSubmit={handleSubmit}>
+                <label>Name: </label>
+                    <input name="username" onChange={handleFormChange} type="text" />
                 <br/>
-            <label>Password:</label>
-                <input name="password" onChange={handleFormChange} type="password" />
-              
-                
-                
+                <label>Password:</label>
+                    <input name="password" onChange={handleFormChange} type="password" />
+            
                 <h6>Choose a Profile Picture:</h6>
                 <div className='avatar-select' >
-                    {profilePics.map((pic) => 
-                        (
+                    {profilePics.map((pic) => (
                             <label for="profile_pic">
                                 <img id={pic.id} src={pic.picture_src} alt={pic.alt_text} style={{height: 50}}/>
                                 <input id={pic.id} type="radio" name="profile_pic" value={pic.id} onChange={handleOptionChange}/>
                             </label>
-                        )
-                    )}
+                            )
+                        )}
                 </div>
                 <input type="submit"/>
-        </form>
+            </form>
         </div>
     )
 }

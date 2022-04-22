@@ -2,7 +2,7 @@ import {UserContext, userObject} from "./context/user"
 import{useNavigate} from 'react-router-dom'
 import {useContext, useEffect} from 'react'
 
-function Header({location}){
+function Header({ location }) {
     // console.log(location)
     const [user, setUser] = useContext(UserContext)
     const navigate = useNavigate()
@@ -16,24 +16,21 @@ function Header({location}){
     // else if (location === "GameList"){
     //     destinationButton = <button onClick={()=> navigate("/userpage")}>view user page</button> }
 
-    function handleLogOut(){
+    function handleLogOut() {
         setUser(userObject)
         navigate("/")
     }
 
-    function handleLogIn(){
+    function handleLogIn() {
         navigate("/")
     }
-    return(
+    return (
         <header className="header">
-
             <h3 className="welcome-user"> Welcome {user ? `back, ${user.username}!` : "to Game Guide"}</h3>
-            <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img>
             {user.username !== "bob" ? <button onClick={handleLogOut}>log out</button> : <button onClick={handleLogIn}>log in</button>}
             {user ? <button onClick={()=> navigate("/userpage")}>view user page</button> : null}
             <button onClick={()=> navigate("/games")}>view games list</button>
             {/* user avatar, log in or view page */}
-            
         </header>
     )
 }

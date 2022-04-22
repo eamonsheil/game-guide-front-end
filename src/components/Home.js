@@ -1,13 +1,12 @@
-import {useState, useContext} from 'react'
-import{useNavigate} from 'react-router-dom'
+import { useState, useContext } from 'react'
+import{ useNavigate } from 'react-router-dom'
 import NewUserForm from './NewUserForm'
-import {UserContext} from "./context/user"
+import { UserContext } from "./context/user"
 
 
 const defaultobj = {username: "", password: ""}
 function Home() {
     const [user, setUser] = useContext(UserContext)
-
     const [userInfo, setUserInfo] = useState(defaultobj)
     const [isNewUser, setIsNewUser] = useState(false)
     const navigate = useNavigate()
@@ -19,22 +18,24 @@ function Home() {
         }
 
         fetch(`http://localhost:9292/users/by-username/${userInfo.username}`)
-        .then( res => res.json())
-        .then( data => {
-            if (data){
-                if(userInfo.username === data.username && userInfo.password === data.password){
-                    setUser(data)
-                    navigate("/games")
+            .then( res => res.json())
+            .then( data => {
+                if (data) {
+                    if (userInfo.username === data.username && userInfo.password === data.password) {
+                        setUser(data)
+                        navigate("/games")
+                    }
+                    else {
+                        alert("Invalid login!")
+                        setUserInfo(defaultobj)
+                        setIsNewUser(()=>!isNewUser)
+                    }
                 }
-                else{
+                else {
                     alert("Invalid login!")
                     setUserInfo(defaultobj)
-                    setIsNewUser(()=>!isNewUser)}
+                    setIsNewUser(()=>true)
                 }
-            else{
-                alert("Invalid login!")
-                setUserInfo(defaultobj)
-                setIsNewUser(()=>true)}
             }
         )
     }   
@@ -43,8 +44,7 @@ function Home() {
         setUserInfo({...userInfo, [name]: value})
     }
 
-    function beGuest(){
-        // setUser(null)
+    function beGuest() {
         navigate('/games')
     }
 
@@ -67,9 +67,7 @@ function Home() {
             <button onClick={beGuest}>Continue as Guest</button>
             {/* <br/> */}
             <button onClick={() => setIsNewUser(!isNewUser)}>Create an Account</button>
-
             {isNewUser ? <NewUserForm setIsNewUser={setIsNewUser} isNewUser={isNewUser}/> : null}
-
         </div>
     )
 }

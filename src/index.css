@@ -81,14 +81,12 @@ button {
 
 .game-list, .saved-game-list{
   background-color: #08C4B1;
-  flex-wrap: wrap;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
   padding: 1em;
   border: 2px solid white;
   border-radius: 10px;
-
 }
 
 .similar-game {
@@ -99,6 +97,13 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 
+}
+
+.search-form-container {
+  margin-right: 1em;
+}
+.search-form {
+  display: block;
 }
 
 .game-list-item, .similar-game, .saved-game-item {
@@ -115,7 +120,6 @@ button {
 
 .game-list-item:hover, .saved-game-item:hover{
   transform: scale(1.1); 
-
 }
 
 input {
