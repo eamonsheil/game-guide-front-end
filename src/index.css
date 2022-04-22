@@ -54,6 +54,7 @@ button {
 
 .account-form{
   height: fit-content;
+  text-align: center;
 }
 
 .add-game-form {
@@ -80,7 +81,7 @@ button {
   margin-right: 1em;
 }
 
-.login button, .account-setting-button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
+.login-button .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
@@ -93,11 +94,12 @@ button {
   color:#0b5565;
   font-size: 1em;
   height: 4em;
-  margin-left: 60%;
+  display: inline;
+  /* float: right; */
 }
 
 .account-form button {
-  font-size: .5em;
+  font-size: 1em;
 }
 
 .close-detail-button{
@@ -181,18 +183,16 @@ input {
 
 
 .user-page h2{
-display: inline-block;
+display: inline;
 }
 
-.game-list-item button, .account-form button, .account-form-submit, .emoji-btn, .saved-game-item button, .key-spot button {
+.game-list-item button, .account-setting-button, .account-form button, .account-form-submit, .emoji-btn, .saved-game-item button, .key-spot button {
 
   background-color:#189084;
   border-radius: 3em;
   transition: all .5s ease-in-out; 
 }
-.account-setting-button {
-  display: inline-block;
-}
+
 
 .account-setting-button:hover {
   transform: scale(1.1);
@@ -270,7 +270,11 @@ h1 {
   background-color: #ffff;
 }
 
-
+/* .user-page-extras {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+} */
 .key-spot{
   display: flex;
   border: white 2px solid;
@@ -400,4 +404,9 @@ margin: 1em 0;
  display: inline-block;
  margin-left: 60%;
  width: 25%;
+}
+
+.account-setting-button {
+  display: inline;
+  font-size: .6em;
 }

@@ -131,10 +131,10 @@ function UserPage() {
         <div className="user-page">
             <Header location="UserPage"/>
             
-            
-            <h2> Your Saved Games: </h2>
-            {showAccountForm ? accountForm : <button onClick={()=> setShowAccountForm(true)} className="account-setting-button">Edit your account settings</button>}
             {user ? <img className="profile-picture" src={user.profile_pic.picture_src} alt="a beauteus gent" ></img> : null}
+            {showAccountForm ? accountForm : <button onClick={()=> setShowAccountForm(true)} className="account-setting-button">Edit your account settings</button>}
+            <br />
+            <h2> Your Saved Games: </h2>
             
             <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
