@@ -164,16 +164,21 @@ input {
   border-radius: 8px;
 }
 
-.game-list-item button, .emoji-btn, .saved-game-item button, .key-spot button {
+.game-list-item button, .account-setting-button, .emoji-btn, .saved-game-item button, .key-spot button {
   background-color:#189084;
   border-radius: 3em;
+  transition: all .5s ease-in-out; 
+}
+
+.account-setting-button:hover {
+  transform: scale(1.1);
 }
 
 .emoji-btn {
   float: left;
 }
 
-.game-list-item button:hover, .emoji-btn:hover, .saved-game-item button:hover  {
+.game-list-item button:hover, .account-setting-button:hover, .emoji-btn:hover, .saved-game-item button:hover  {
   background-color:#24c2b2;
 }
 
