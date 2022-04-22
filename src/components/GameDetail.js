@@ -86,7 +86,7 @@ function GameDetail({detailID}) {
                     <p><strong>Play time:</strong> {currentGame.min_play_time} - {currentGame.max_play_time} minutes</p>
                     <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
                     {user && !currentGameOwned ? <button className="form-button" onClick={() => toggleGameForm(currentGame)}>Add to Your Game List?</button> : null}
-                    {showGameForm ? <AddToGamesForm setShowGameForm={setShowGameForm} currentGame={currentGame} /> : <p> <strong>This game is in your list! </strong></p>} 
+                    {showGameForm ? <AddToGamesForm setShowGameForm={setShowGameForm} currentGame={currentGame} /> : <p className='in-your-list'> This game is in your list! </p>} 
 
                     <p><strong>Game Description:</strong></p>
                     <div className="detail-description" dangerouslySetInnerHTML={showDescription}/>

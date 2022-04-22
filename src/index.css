@@ -81,6 +81,14 @@ button {
   margin-right: 1em;
 }
 
+.in-your-list {
+  background-color: #538c97;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 1em;
+
+}
+
 .login-button, .login button, .login-submit, .sassy-button, .form-button, .close-detail-button, .add-game-form-submit  {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
