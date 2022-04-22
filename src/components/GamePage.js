@@ -109,10 +109,7 @@ function GamePage() {
                 <input className='game-list-submit' type="submit"></input>
         </form>
         </div>
-            
-
-            {showKey ? emojiKey : <button className='emoji-btn' onClick={()=> setShowKey(true)}>emoji explainer</button>}
-            
+                        
             {/* {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Close Details</button> : null}
         
             {showDetail ? <GameDetail detailID={currentGame.id}/> : null} */}
