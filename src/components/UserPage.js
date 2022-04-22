@@ -3,9 +3,11 @@ import {useContext, useState, useEffect} from 'react'
 import Header from "./Header"
 import{useNavigate} from 'react-router-dom'
 import GameDetail from "./GameDetail"
+import GameList from "./GameList"
 
 
 function UserPage() {
+
     const [user] = useContext(UserContext)
     const navigate = useNavigate()
     const [showDetail, setShowDetail] = useState(false)
@@ -13,55 +15,46 @@ function UserPage() {
     const [userGames, setUserGames] = useState([])
 
     useEffect(() => {
-        console.log(user.id)
+        // console.log(user.id)
         fetch(`http://localhost:9292/user_games/${user.id}`)
         .then(resp => resp.json())
         .then(data => setUserGames(data))
     }, [])
 
-    function toggleGameDetail(game) {
-        setShowDetail(!showDetail)
-        setCurrentGame(game)
-    }
+    // function toggleGameDetail(game) {
+    //     setShowDetail(!showDetail)
+    //     setCurrentGame(game)
+    // }
 
 
-    function removeFromGames(game, event){
-        fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
-            method: "DELETE"
-        })
-        .then( res => res.json())
-        .then( data => {
-            console.log(data)
-            // event.target.parent.remove()
-        })
-        .catch( error => console.log(error.message));
-    }
+    // function removeFromGames(game, event){
+    //     fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
+    //         method: "DELETE"
+    //     })
+    //     .then( res => res.json())
+    //     .then( data => {
+    //         // console.log(data)
+    //         // event.target.parent.remove()
+    //     })
+    //     .catch( error => console.log(error.message));
+    // }
 
-    // if(user === null){navigate('/games')}
+    if(!user){navigate('/games')}
     let gameDisplay
 
     if(user.game_relationships){
-        const gamesToShow = userGames.map(game => {
-            return(
-                <li className='saved-game-item'>
-                    <img className="saved-list-img" src={game.image_url} alt={game.title} height="100px" width="auto"/>
-                    <p>Title: <strong>{game.title}</strong></p>
-                <button onClick={() => toggleGameDetail(game)}>View Details</button>
-                <button onClick={(event) => removeFromGames(game, event)}>remove from your list</button>
-                </li>
-            )
-        })
 
-        gameDisplay = <div>
-            <h3>Your Saved Games</h3>
-            {gamesToShow}
-        </div>
+
+        gameDisplay = <>
+            <h3>Your Saved Games:</h3>
+            <GameList games={userGames}/>
+        </>
     }
     else{
         gameDisplay = <div>
             <p>you have no saved games! Oh nooooooooo</p>
             <p>check out our game page to add some games to your list</p>
-            <button onClick={()=>navigate('/games')}>FIND SOME DAMN GAMES</button>
+            <button className="sassy-button"onClick={()=>navigate('/games')}>FIND SOME DAMN GAMES</button>
         </div>
     }
 
@@ -69,10 +62,8 @@ function UserPage() {
         <div className="user-page">
             <Header location="UserPage"/>
             <h2> User Page: </h2>
-            {/* {gameDisplay} */}
 
-            <ul className='saved-game-list'>
-                {/* {gameDisplay} */}
+            <ul className='game-list'>
                 {showDetail ? <button onClick={() => setShowDetail(!showDetail)}>Show All</button> : null} 
                 {showDetail ? <GameDetail detailID={currentGame.id}/> : gameDisplay}
             </ul>

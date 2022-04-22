@@ -37,6 +37,7 @@ button {
   text-align: left;
   margin-bottom: 0px;
   margin-top: 0px;
+  padding: 0px;
 }
 
 .comments{
@@ -66,7 +67,7 @@ button {
   margin-right: 1em;
 }
 
-.login button, .login-submit {
+.login button, .login-submit, .sassy-button, .form-button {
   background-color: rgba(39, 84, 167, 0.4) ;
   padding: 1em;
   border-radius: 50%;
@@ -75,7 +76,11 @@ button {
   opacity: 1;
 }
 
-.login button:hover, .login-submit:hover{
+.sassy-button{
+  background-color: rgba(39, 84, 167, 0.7) ;
+}
+
+.login button:hover, .login-submit:hover, .sassy-button:hover{
   background-color: #888;
 }
 

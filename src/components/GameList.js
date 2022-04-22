@@ -1,9 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import {UserContext} from "./context/user"
 import GameDetail from './GameDetail'
+import {useLocation} from 'react-router-dom'
+
 
 
 function GameList({games}) {
+    const location = useLocation()
+    console.log(location.pathname)
     const [user, setUser] = useContext(UserContext)
     const [showDetail, setShowDetail] = useState(false)
     const [currentGame, setCurrentGame] = useState({})
@@ -13,9 +17,22 @@ function GameList({games}) {
         setCurrentGame(game)
     }
 
+    function removeFromGames(game, event){
+        fetch(`http://localhost:9292/game_relationships/${user.id}/${game.id}`, {
+            method: "DELETE"
+        })
+        .then( res => res.json())
+        .then( data => {
+            console.log(data)
+            console.log(event.target)
+            // event.target.parent.remove()
+        })
+        .catch( error => console.log(error.message));
+    }
+
+
     const showGames = games.map((game) => {
         let isOwnedDiv
-        console.log(game.game_relationships)
         if(user){game.game_relationships.forEach(relationship => {
             if(relationship.user_id === user.id){
                 isOwnedDiv = <div>
@@ -40,6 +57,7 @@ function GameList({games}) {
                     </div>
                     {isOwnedDiv}
                     <button onClick={() => toggleGameDetail(game)}>View Details</button>
+                    {location.pathname === '/userpage' ? <button onClick={(event) => removeFromGames(game,event)}>Remove from Your Games</button>:null}
             </li>
         )
     })

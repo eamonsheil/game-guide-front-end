@@ -7,9 +7,11 @@ import GameList from './GameList';
 
 function GameDetail({detailID}) {
 
+
     const [user, setUser] = useContext(UserContext)
     
     const [showGameForm, setShowGameForm] = useState(false)
+
     function toggleGameForm(game){
         setShowGameForm(!showGameForm)
         setCurrentGame(game)
@@ -60,9 +62,16 @@ function GameDetail({detailID}) {
             )
         })
         return comments
-    
     }
 
+    let currentGameOwned = false
+    if(user){
+        // console.log(currentGame.game_relationships)
+        currentGame.game_relationships.forEach(relationship => {
+        if(relationship.user_id === user.id){
+            currentGameOwned = true
+        }
+        })}
 
     return(
         <div className='game-detail'>
@@ -76,6 +85,9 @@ function GameDetail({detailID}) {
                     <p><strong>Rating: </strong>{Math.floor(currentGame.rating)} / 10</p>
                     <p><strong>Play time:</strong> {currentGame.min_play_time} - {currentGame.max_play_time} minutes</p>
                     <p><strong>Number of players:</strong> {currentGame.min_players} to {currentGame.max_players}</p>
+                    {user && !currentGameOwned ? <button className="form-button" onClick={() => toggleGameForm(currentGame)}>Add to Your Game List?</button> : null}
+                    {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null} 
+
                     <p><strong>Game Description:</strong></p>
                     <div className="detail-description" dangerouslySetInnerHTML={showDescription}/>
                     
@@ -90,8 +102,6 @@ function GameDetail({detailID}) {
                 <div className='game-list'>
                     <GameList games={similarGames}/>
                 </div>
-                {/* {user && !isOwnedDiv ? <button onClick={() => toggleGameForm(currentGame)}>Add to My Games</button> : null}
-                    {showGameForm ? <AddToGamesForm currentGame={currentGame} setShowGameForm={setShowGameForm}/> : null} */}
             </div>
 
     )
